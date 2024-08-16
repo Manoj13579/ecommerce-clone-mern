@@ -1,0 +1,25 @@
+/* App */
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+  /* setting  box-sizing: border-box any margin added inside box, container, input field
+  etc is calculated within that container.eg if container is 300px height and width, margin set to 20px
+   padding to 20 px all will be calculated and within 300px height and width.if set to default box sizing is content 
+   where this margin padding is added extra and total height width will be 340px */
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+.toastBody {
+  font-size: 1.2rem;
+}
+
+/* Error */
+.error-state-error {
+  color: rgb(150, 60, 60);
+  background-color: rgb(236, 206, 206);
+}

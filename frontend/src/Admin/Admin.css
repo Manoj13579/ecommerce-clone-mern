@@ -1,0 +1,465 @@
+/* AdminLayout */
+.admin-layout-container .logout {
+    color: #c55c20;
+    cursor: pointer;
+    font-weight: bolder;
+    float: right;
+    margin-right: 1rem;
+  }
+  .admin-info-container {
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    background-color: #e2cfc4;
+    border: solid rgb(214, 205, 205);
+    border-radius: 1rem;
+  }
+  .admin-layout-profile-picture {
+    width: 6vw;
+    height: 6vw;
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 0.7rem;
+    margin-right: 0.2rem;
+  }
+  .admin-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f85b4b;
+  }
+  .admin-info > h6 {
+    font-weight: bold;
+  }
+  .admin-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+  .admin-navbar a {
+    color: #f85b4b;
+    font-weight: 500;
+    flex: 1;
+    background-color: #e2cfc4;
+    border: solid rgb(214, 205, 205);
+    margin: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+  }
+  .admin-navbar a:hover {
+    color: #c52121;
+    font-weight: 600;
+  }
+  .admin-navbar .adminLink {
+    font-weight: bold;
+    text-decoration: underline;
+    color: #f85b4b;
+  }
+  
+  /* TotalProduct */
+  .totalproduct-container .header > h5 {
+    color: #f85b4b;
+    font-weight: bold;
+  }
+  .totalproduct-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .totalproduct-container .header button {
+    height: 5vh;
+    width: 10%;
+    margin-left: 1rem;
+    border: none;
+    background-color: #e2cfc4;
+    color: black;
+    margin-bottom: 0.2em;
+    border-radius: 0.5rem;
+  }
+  .totalproduct-container table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 98%;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  .totalproduct-container table thead th {
+    border: 1px solid #dabeae;
+    text-align: left;
+    padding: 8px;
+    color: #f85b4b;
+  }
+  
+  
+  .totalproduct-container table tbody td {
+    color: #f85b4b;
+    border: 1px solid #dabeae;
+  }
+  
+  .totalproduct-price {
+    color: #f85b4b;
+  }
+  
+  
+  .totalproduct-button-edit {
+    height: 3.5vh;
+    width: 30%;
+    margin-left: 1rem;
+    border: none;
+    background-color: #f57224;
+    color: #ddd4d4;
+    font-size: 0.8rem;
+  }
+  .totalproduct-button-delete {
+    font-size: 0.8rem;
+    height: 3.5vh;
+    width: 30%;
+    margin-left: 1rem;
+    border: none;
+    background-color: rgb(223, 8, 8);
+    color: #ddd4d4;
+  }
+  .totalproduct-img  > img {
+    width: 20%;
+    height: 8vh;
+    object-fit: cover;
+  }
+  
+  /* Total Order */
+  .totalorder-container > h5 {
+    color: #f85b4b;
+    font-weight: bolder;
+    margin-left: 1rem;
+  }
+  .totalorder-container table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 98%;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .totalorder-container table thead th {
+    border: 1px solid #dabeae;
+    text-align: left;
+    padding: 8px;
+    color: #f85b4b;
+  }
+  
+  .totalorder-container table tbody tr:nth-child(odd) {
+    background-color: #e2cfc4;
+  }
+  
+  .totalorder-container table tbody td {
+    color: #f85b4b;
+    border: 1px solid #dabeae;
+  }
+  .totalorder-dropdown {
+    display: flex;
+    align-items: center;
+  }
+  
+  .totalorder-dropdown .dropdown-toggle {
+     /* Custom styles for the dropdown toggle button */
+     min-width: 9%;
+     height: 6vh;
+     border: none;
+     border-radius: 1rem;
+     outline: 0;
+     box-shadow: none;
+     cursor: pointer;
+     background-color: #c0b3ab;
+     color: #f85b4b;
+     margin-right: 1rem;
+  }
+  .totalorder-dropdown .dropdown-menu .dropdown-item {
+    /* Custom styles for dropdown items of bootstrap*/
+    color: #f85b4b;
+    cursor: pointer;
+    font-weight: bolder;
+  }
+  .totalorder-dropdown .dropdown-menu .dropdown-item:hover {
+    background-color: #d3bebe;
+  }
+  .totalorder-button-delete {
+    font-size: 0.8rem;
+    margin-left: 1rem;
+    border: none;
+    background-color: rgb(223, 8, 8);
+    color: #ddd4d4;
+  }
+
+  
+  /* Total User */
+  .totaluser-container > h5 {
+    color: #f85b4b;
+    font-weight: bold;
+    margin-left: 1rem;
+  }
+  .totaluser-container table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 98%;
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+  
+  .totaluser-container table thead th {
+    border: 1px solid #dabeae;
+    text-align: left;
+    padding: 8px;
+    color: #f85b4b;
+  }
+  
+  .totaluser-container table tbody tr:nth-child(odd) {
+    background-color: #e2cfc4;
+  }
+  .totaluser-container table tbody td {
+    color: #f85b4b;
+    border: 1px solid #dabeae;
+  }
+  
+  /* AdminProductHandle */
+  .adminproduct-handle-newprice{
+    color: #F85B4B;
+  }
+  .adminproduct-handle-oldprice{
+   color: #757373;
+   margin-left: 1rem;
+   text-decoration: line-through;
+  }
+  .adminproduct-handle-card-organize{
+    display: flex;
+    flex-wrap: wrap;
+    top: 8rem;
+    flex: 1;
+    flex: 1;
+  }
+  .adminproduct-handle-card-body{
+    flex: 1 0 21%;
+    margin: 0.625rem;
+  }
+  .adminproduct-handle-card-img-top{
+    height: 22vh;
+    margin-left: 2.5rem;
+    margin-top: 0.5rem;
+  }
+  .adminproduct-handle-card-title{
+    font-size: 0.625rem;
+  }
+  
+  .adminproduct-handle-totalcontainer {
+    display: flex;
+  }
+  .adminproduct-handle-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-width: 80%;
+  }
+  .adminproduct-handle-input-container {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 90vh;
+  }
+  .adminproduct-handle-input-container > p {
+    margin: 0;
+    color: #776969;;
+  }
+  .adminproduct-handle-input-container > input {
+    outline: none;
+    height: 10vh;
+    border-radius: 0.5rem;
+    border-style: none;
+    background-color: #dabeae;
+    color: #161616;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .adminproduct-handle-input-container > select {
+    outline: none;
+    height: 10vh;
+    border-radius: 0.5rem;
+    border-style: none;
+    background-color: #dabeae;
+    color: #757373;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .adminproduct-handle-input-container > textarea {
+    text-align: center;
+    outline: none;
+    border-radius: 0.5rem;
+    border-style: none;
+    background-color: #dabeae;
+    color: #161616;
+    font-size: 1.2rem;
+  }
+  .adminproduct-handle-submit-update-btn {
+    border: none;
+    background-color: #f57224;
+    color: #ddd4d4;
+    width: 7%;
+    height: 5vh;
+    border-radius: 1rem;
+    margin-top: 0.5rem;
+  }
+  
+  .adminproduct-handle-button-edit {
+    margin-left: 1rem;
+    border: none;
+    background-color: #f57224;
+    color: #ddd4d4;
+    width: 7%;
+    height: 5vh;
+    border-radius: 1rem;
+  }
+  .adminproduct-handle-backpage {
+    margin-left: 1rem;
+    margin-top: 4rem;
+    border: none;
+    background-color: #f57224;
+    color: #ddd4d4;
+    width: 15%;
+    height: 4vh;
+    
+  }
+  .adminproduct-form-upload-text {
+    color: rgb(112, 109, 109);
+    margin-bottom: 0rem;
+  }
+  .adminproduct-addproduct-thumbnail-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: contain;
+    margin: 10px 0px;
+    border: 1px solid #dabeae;
+    cursor: pointer;
+  }
+  .adminproduct-addproduct-btn {
+    border: none;
+    background-color: #1cb4f0;
+    color: #ddd4d4;
+    width: 7%;
+    height: 5vh;
+    border-radius: 1rem;
+  }
+
+  /* AdminProfileEdit */
+
+.admin-profile-register-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 90vh;
+}
+.admin-profile-register-text {
+    color: orangered;
+}
+.admin-profile-form-container {
+    display: flex;
+    height: 90vh;
+    flex: 1;
+    align-items: center;
+    flex-direction: column;
+    padding-inline: 1.6875rem;
+    width: 40%;
+    overflow: hidden;
+    float: left;
+    box-shadow: -5px 0 5px rgba(124, 117, 117, 0.5);
+}
+
+.admin-profile-form-container .admin-profile-input-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 31.25rem;
+    margin-top: 1rem;
+}
+.admin-profile-input-form > input {
+    border: 1px solid rgba(209, 213, 219);
+    height: 6vh;
+    text-indent: 0.6rem;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    width: 90%;
+}
+.admin-profile-input-form .admin-profile-password-input-container > input {
+    position: relative;
+    border: 1px solid rgba(209, 213, 219);
+    height: 6vh;
+    text-indent: 0.6rem;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    width: 82.5%;
+    border-right: none;
+}
+.admin-profile-toggle-password {
+    margin-top: 0.5rem;
+    position: absolute;
+    cursor: pointer;
+    width: 3%;
+    border: 1px solid rgba(209, 213, 219);
+    height: 6vh;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+    border-left: none;
+    opacity: 0.8;
+}
+
+.admin-profile-input-form > input:focus{
+    outline: none;
+}
+.admin-profile-input-form .admin-profile-password-input-container > input:focus {
+    outline: none;
+}
+
+
+.admin-profile-input-form > button {
+    background-color: rgb(33, 47, 173);
+    border: none;
+    border-radius: 0.375rem;
+    height: 2rem;
+    margin-top: 1.375rem;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.admin-profile-input-form > button:disabled{
+    background-color: #aaaaaa;
+    cursor: not-allowed;
+}
+
+.admin-profile-register-img {
+    flex: 1;
+    width: 40%;
+    height: 90vh;
+    float: left;
+    overflow: hidden;
+    opacity: 0.8;
+}
+.admin-profile-cancel-button {
+  background-color: #e57373;
+    border: none;
+    border-radius: 0.375rem;
+    height: 2rem;
+    margin-top: 1.375rem;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+}

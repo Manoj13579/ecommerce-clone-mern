@@ -1,0 +1,103 @@
+/* searchItems */
+  .searchitems-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+  
+  .searchitems-dropbtn {
+    background-color: white;
+    color: black;
+    font-size: 0.9rem;
+    text-align: start;
+    border: solid #8a8686;
+    border-width: 0.1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+  }
+  
+  .searchitems-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 2px 2px #e9e0e0;
+    width: auto;
+    z-index: 1;
+  }
+  
+  .searchitems-dropdown-content button {
+    display: block;
+    border: none;
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
+  .searchitems-dropdown-content button:hover {
+    background-color: #ddd7d7;
+  }
+  
+  .searchitems-dropdown:hover .searchitems-dropdown-content {
+    display: block;
+  }
+  
+  .searchitems-arrowdown {
+    border: solid #494545;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-left: 9rem;
+  }
+  .searchitems-arrowdown {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  .searchitems-ul > ul {
+    list-style-type: none;
+  }
+  .searchitems-card-organize {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .searchitems-card-body {
+    flex: 1 0 21%;
+    margin: 0.625rem;
+    flex-wrap: wrap;
+  } 
+  .searchitems-card-img-top {
+    height: 22vh;
+    align-self: center;
+    cursor: pointer;
+    width: 100%;
+    }
+    .searchitems-card-title {
+      font-size: 0.625rem;
+    }
+    .searchitems-newprice {
+      color: #f85b4b;
+    }
+    .searchitems-oldprice {
+      color: #757373;
+      margin-left: 1rem;
+      text-decoration: line-through;
+    }
+  
+  .searchitems-back-button {
+    border: none;
+    background-color: #f57224;
+    color: #ddd4d4;
+    font-size: 0.8rem;
+    margin: 1rem;
+  }
+  
+  
+  .searchitems-sorry {
+    background-color: #f85b4b;
+    color: #e9e0e0;
+    width: 30%;
+    /* auto takes available space here right, left. for margin auto to work parent container should have specified with. if no
+            width use text-align: ___ or float:___ */
+    margin: 0 auto;
+    margin-top: 1rem;
+    border-radius: 0.4rem;
+  }

@@ -6,7 +6,20 @@ import { acessTokenExpiryDate, refreshTokenExpiryDate, resetTokenExpiryDate } fr
 dotenv.config();
 import nodemailer from "nodemailer";
 
+/*
+A JWT consists of three parts:
 
+Header: Contains metadata about the token, such as the algorithm used to sign it.
+Payload: Contains the claims or data you want to transmit.
+Signature: Ensures that the token has not been tampered with.
+Decoding JWT
+Decoding a JWT simply means Base64url-decoding the Header and Payload. This reveals the content of these parts but not the Signature or the key used to generate it. The Signature is a cryptographic hash of the Header and Payload, generated using a secret key (in HMAC algorithms) or a private key (in RSA or ECDSA algorithms).
+Why You Can't Get the Secret Key
+Hashing and Signing: The Signature in a JWT is created using a cryptographic algorithm. For HMAC algorithms, the Signature is a hash computed with a secret key, but the process is one-way. You cannot reverse the hash to find the original key.
+
+One-Way Functions: Hashing functions (like those used in HMAC) are designed to be one-way operations. They produce a fixed-size hash from an input, but it is computationally infeasible to reverse the process to get the original input or secret key.
+
+Key Protection: Secret keys are meant to be kept secure and not exposed. Even though you can decode the contents of a JWT, you cannot derive or extract the secret key from the JWT itself. */
 const userssignup = async (req, res) => {
   
   try {

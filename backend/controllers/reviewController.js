@@ -14,7 +14,8 @@ const review = async(req, res) => {
 
 const getReviewByProductId = async(req, res) => {
   
-    const productId = req.query.productId;
+    const productId = req.query.productId;  
+    
     
     if(!productId){
       return res.status(400).json({ success: false, message: 'Product not found'})
@@ -22,6 +23,8 @@ const getReviewByProductId = async(req, res) => {
     try {
       /* .find returns all items of given parameter here productid whereas findOne returns only one item of given parameter */
       const data = await Review.find({productId: productId});
+      console.log('productId data', data);
+      
       return res.status(200).json({ success: true, message: "successfully fetched user review", data})
     }
      catch (error) {

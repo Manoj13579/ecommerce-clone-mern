@@ -134,7 +134,7 @@ const handleReviewCancel = () => {
     {loading && <Loader />}
     {userOrder?.length > 0 ? (
       <section>
-        {userOrder?.map((product) => (
+        {userOrder?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).map((product) => (
           <div key={product._id} className='myorder-container'>
             {/* here no need to use && but below By adding product.cartProducts ?, you're ensuring that cartProducts is not undefined or null before trying to map over it. takes time to get value in child array and throws error if used below */}
   {/* product.cartProducts takes time to load so need ?.

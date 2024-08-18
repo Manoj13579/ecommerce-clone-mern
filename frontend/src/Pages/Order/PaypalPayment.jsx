@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { toast } from 'react-toastify';
-import axios from 'axios';import { resetCart } from '../../Store/cartSlice';
+import axios from 'axios';
+import { resetCart } from '../../Store/cartSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

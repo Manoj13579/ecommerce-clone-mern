@@ -34,8 +34,10 @@ import SearchItems from "./Components/OtherComponents/SearchItems.jsx";
 import AddCart from "./Pages/SinglePages/AddCart.jsx";
 import Order from "./Pages/Order/Order.jsx";
 import UserOrder from "./Pages/Order/UserOrder.jsx";
-import SideMenuPage from "./Pages/SinglePages/SideMenuPage.jsx";
 import PaypalPayment from "./Pages/Order/PaypalPayment.jsx";
+import CategoryPage from "./Pages/SinglePages/CategoryPage.jsx";
+import EsewaPaymentOrder from "./Pages/Order/EsewaPayment/EsewaPayment.jsx";
+import VerifyEsewaResponse from "./Pages/Order/EsewaPayment/VerifyEsewaResponse.jsx";
 
 
 
@@ -61,13 +63,15 @@ const router = createBrowserRouter(
       <Route path="jwtemail-confirmation" element={<JwtEmailConfirmation />} />
       <Route path="register" element={<Register />} />
       <Route path="search" element={<SearchItems />} />
-      <Route path="sidemenupage/:category" element={<SideMenuPage />} />
+      <Route path="categorypage/:category" element={<CategoryPage />} />
       <Route element={<UserProtectedRoute />}>
       <Route path="cart" element={<Cart />}/>
       <Route path="order" element={<Order />}/>
-      <Route path="paypal-payment" element={<PaypalPayment />}/>
       <Route path="userorder" element={<UserOrder />}/>
       <Route path="userprofileedit" element={<UserProfileEdit />} />
+      <Route path="paypal-payment" element={<PaypalPayment />}/>
+      <Route path="esewapayment" element={<EsewaPaymentOrder />} />
+      <Route path="verify-esewa-response" element={<VerifyEsewaResponse />} />
       </Route>
     </Route>
     <Route element={<AdminProtectedRoute />}>

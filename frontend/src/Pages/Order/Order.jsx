@@ -49,6 +49,9 @@ const Order = () => {
       } else if (paymentMethod === 'paypal') {
         proceedWithPayPal();
       }
+      else{
+          proceedWithEsewa();
+      }
     };
     
 
@@ -109,6 +112,11 @@ const proceedWithPayPal = () => {
   // Implement PayPal payment process here
   // Redirect to PayPal checkout or initiate PayPal payment flow
   navigate("/paypal-payment");
+};
+const proceedWithEsewa = () => {
+  // Implement PayPal payment process here
+  // Redirect to PayPal checkout or initiate PayPal payment flow
+  navigate("/esewapayment");
 };
 
 /* price *(multiply) quantity won't work coz we have to calculate more 
@@ -196,6 +204,15 @@ then one items inside a cart. */
         onChange={(e) => setPaymentMethod(e.target.value)}
       />
      <span className="order-payment-method-container-text">Pay with PayPal</span>
+     </label>
+     <label>
+      <input
+        type="radio"
+        value="esewa"
+        checked={paymentMethod === 'esewa'}
+        onChange={(e) => setPaymentMethod(e.target.value)}
+      />
+     <span className="order-payment-method-container-text">Pay with Esewa</span>
      </label>
   </div>
             <button type="submit">Place Order</button>

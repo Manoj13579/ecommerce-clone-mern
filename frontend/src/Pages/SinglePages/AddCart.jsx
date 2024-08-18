@@ -20,6 +20,8 @@ const AddCart = () => {
   const allproducts = useSelector(state => state.products.data);
   const param = useParams();
   const productid = param.id;
+  
+  
   //find method returns the first element in the array that satisfies the provided testing function. 
   /* filter method returns all element in the array that satisfies the provided testing function
        so it is an array*/
@@ -27,7 +29,6 @@ const AddCart = () => {
   const[productReviewById, setProductReviewById] = useState();
   const[loading, setLoading] = useState(false);
 
-  
 
   const handleAddToCart = (product) => {
     dispatch(add(product));
@@ -51,6 +52,8 @@ const getReviewByProductId = async () => {
     );
     if(response.data.success){
       setProductReviewById(response.data.data);
+      
+      
     }
   } 
   catch (error) {

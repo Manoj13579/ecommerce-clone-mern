@@ -9,6 +9,8 @@ import eitherAuthMiddleware from '../middleware/eitherAuthMiddleware.js';
 import { getReviewByProductId, review } from '../controllers/reviewController.js';
 import { uploadImageOnCloudinary } from '../controllers/cloudinaryUploadController.js';
 import { capturePaypalOrder, createPaypalOrder } from '../Config/paypalConfig.js'
+import { esewaGetSecret, verifyEsewaResponse } from '../Config/esewaConfig.js';
+
 
 
 
@@ -89,4 +91,8 @@ A POST request to /paypal/create_order will be handled by the create_order route
 A POST request to /paypal/complete_order will be handled by the complete_order route defined in your PayPal routes file.paypalRoutes.js imported above*/
 router.post('/api/orders', eitherAuthMiddleware, createPaypalOrder);
 router.post('/api/orders/:orderID/capture',eitherAuthMiddleware, capturePaypalOrder);
+
+// esewa route
+router.post('/api/esewa-getsecret', esewaGetSecret);
+router.post('/api/verify-esewa-response', verifyEsewaResponse);
 export default router;

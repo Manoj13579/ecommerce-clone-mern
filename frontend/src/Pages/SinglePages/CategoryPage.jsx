@@ -6,7 +6,7 @@ import './singlePages.css';
 
 
 
-const SideMenuPage = () => {
+const CategoryPage = () => {
 
 const dispatch = useDispatch();
 const param = useParams();
@@ -75,4 +75,4 @@ return (
 
 }
 
-export default SideMenuPage;
+export default CategoryPage;

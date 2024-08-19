@@ -113,14 +113,14 @@ const Layout = () => {
   <>
   <div className="top-navbar">
           <a href="#">Help & Support</a>
-          <a href="#">Daraz Logistics Partner</a>
+          <a href="#">Logistics Partner</a>
   </div>
 <nav className="secondnavbar-container">
-<Link to='/'><h3>Daraz</h3></Link>
+<Link to='/'><h3>E Clone</h3></Link>
 <form onSubmit={handleSearchSubmit} className='inputsecondnavbar-wrapper'>
     <input className='input-secondnavbar'
         type="search" 
-        placeholder="Search in Daraz" 
+        placeholder="Search in E Clone" 
         aria-label="Search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}

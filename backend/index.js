@@ -60,8 +60,10 @@ app.use(express.json());
 
 // Allow requests from localhost:5173 using for cookies to work
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  credentials: true, // <-- Required for cookies and auth headers
+  origin: 'https://ecommerce-clone-mern-frontend.onrender.com', // Your frontend URL
+  credentials: true, // Allow cookies to be sent
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+  // credentials: true, // <-- Required for cookies and auth headers
   };
 app.use(cors(corsOptions));
 /*Multer handles file uploads and stores the files in the specified directory.

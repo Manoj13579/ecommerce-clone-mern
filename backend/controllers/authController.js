@@ -29,7 +29,7 @@ const userssignup = async (req, res) => {
       email: req.body.email,
       password: hashedPassword,
       photo: req.body.photo,
-      role: req.body.role,
+      role: 'user',
       authProvider: "jwt"
     });
 

@@ -1,0 +1,10 @@
+# Node.js / Express
+node_modules/
+
+# Environment variables
+*.env
+esewaConfig.md
+passport.md
+paypalConfig.md
+authController.md
+users.md

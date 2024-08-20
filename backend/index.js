@@ -12,6 +12,7 @@ import session from 'express-session';
 // import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import './Config/passport.js';
+import MongoStore from 'connect-mongo';
 
 
 // for using .env
@@ -33,6 +34,10 @@ Session Data Handling: Although the cookie is created, it doesn’t mean that an
 Change saveUninitialized Setting:
 If you don’t want to create a session cookie for users who haven’t interacted with your application or logged in, set saveUninitialized to false. This way, a session is only created and saved when it contains data or has been modified. */
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions'
+  }),
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Set to true in production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie

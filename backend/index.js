@@ -22,7 +22,7 @@ const app = express();
 
 /* all app.use are middlewares. when user clicks for this port or whenever over any path user comes to this site the site passes only through index.js. so it should go through all these middlewares. these middleware kept here coz necessary whenever this page is called they have to go through these . e.g. app.use(cookieParser()); middleware The cookie-parser middleware parses the cookies attached to the client request object (req). When a request comes in, cookie-parser reads the cookies from the Cookie header and makes them available in req.cookies. If no cookies are sent with a request, the cookie-parser middleware will simply handle this gracefully without causing any issues. there are middleware that are always neede like cors and some may be needed or not like app.use(session  */
 // google auth keep it up here to work
-/* The app.use(session({}})) middleware setup is essential for maintaining user sessions in web applications. It works hand-in-hand with Passport.js (and other authentication mechanisms) to:
+/* The app.use(session({}})) middleware setup is essential for maintaining user sessions in web applications. any cookies generated or one session will get this configuration. so It also  works hand-in-hand with Passport.js (and other authentication mechanisms) to:
 Authenticate users: Track user sessions securely using signed cookies.
 Store session data: Persist user session information across requests.
 Manage session state: Handle session-related operations such as starting, maintaining, and ending sessions.*/ 
@@ -41,8 +41,8 @@ If you don’t want to create a session cookie for users who haven’t interacte
   cookie: {
     secure: process.env.NODE_ENV === 'production', // Set to true in production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
-    sameSite: 'None', // Adjust as needed: 'lax', 'strict', or 'none'
-    maxAge: 24 * 60 * 60 * 1000 // Cookie expiration time (1 day)
+    sameSite: "strict", // Adjust as needed: 'lax', 'strict', or 'none'
+    maxAge: 24 * 60 * 60 * 1000 // Cookie expiration time (1 day).for jwt set differently.
   },
 }));
 /*These middleware functions including app.use are used in your main application file (index.js) to initialize Passport.js and handle sessions. through passport code in googleauthController.js and passport.js interact with each other.
@@ -60,10 +60,9 @@ app.use(express.json());
 
 // Allow requests from localhost:5173 using for cookies to work
 const corsOptions = {
-  origin: 'https://ecommerce-clone-mern-frontend.onrender.com', // Your frontend URL
+  origin: process.env.FRONTEND_URL,
   credentials: true, // Allow cookies to be sent
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-  // credentials: true, // <-- Required for cookies and auth headers
   };
 app.use(cors(corsOptions));
 /*Multer handles file uploads and stores the files in the specified directory.

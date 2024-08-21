@@ -62,7 +62,7 @@ app.use(express.json());
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
   credentials: true, // Allow cookies to be sent
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH'], // Allowed methods
   };
 app.use(cors(corsOptions));
 /*Multer handles file uploads and stores the files in the specified directory.

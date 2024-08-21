@@ -44,7 +44,7 @@ const userssignup = async (req, res) => {
 
    
     res.cookie("accessToken", accessToken, {
-      httpOnly: true,
+     httpsOnly: true,
       secure: false, // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
     });
@@ -60,7 +60,7 @@ const userssignup = async (req, res) => {
     await user.save();
 
     res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
+     httpsOnly: true,
       secure: false,
       sameSite: "none",
     });
@@ -115,7 +115,7 @@ const userslogin = async (req, res) => {
     );
 
     res.cookie("accessToken", accessToken, {
-      httpOnly: true,
+     httpsOnly: true,
       secure: false, // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks 
     });
@@ -130,9 +130,9 @@ const userslogin = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    // httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
+    //httpsOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
+     httpsOnly: true,
       secure: false,
       sameSite: "none",
     });
@@ -202,14 +202,14 @@ const refreshToken = async (req, res) => {
       await user.save();
 
       res.cookie("accessToken", newAccessToken, {
-        httpOnly: true,
+       httpsOnly: true,
         secure: false,
         sameSite: "none",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
-        httpOnly: true,
+       httpsOnly: true,
         secure: false,
         sameSite: "none",
 

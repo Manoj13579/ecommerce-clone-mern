@@ -43,7 +43,8 @@ saveUninitialized: false,
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "none", // Adjust as needed: 'lax', 'strict', or 'none'
     maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day).for jwt set differently.
-    path: '/', 
+    path: '/',
+    domain: '.onrender.com', 
   },
 }));
 /*These middleware functions including app.use are used in your main application file (index.js) to initialize Passport.js and handle sessions. through passport code in googleauthController.js and passport.js interact with each other.

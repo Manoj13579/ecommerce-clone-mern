@@ -118,7 +118,8 @@ const userslogin = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
-      path: '/' 
+      path: '/',
+      domain: '.onrender.com', 
     });
 
     const refreshToken = jwt.sign(
@@ -137,6 +138,7 @@ const userslogin = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
       path: '/',
+      domain: '.onrender.com',
     });
     // Return response with new access token
     return res.json({
@@ -208,6 +210,7 @@ const refreshToken = async (req, res) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         path: '/',
+        domain: '.onrender.com',
       });
 
       res.cookie("refreshToken", newRefreshToken, {
@@ -215,6 +218,7 @@ const refreshToken = async (req, res) => {
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
         path: '/',
+        domain: '.onrender.com',
       });
 
       res

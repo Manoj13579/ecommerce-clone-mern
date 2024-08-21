@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch} from "react-redux";
-import { SET_ACCESS_TOKEN } from "../../Store/loginSlice";
+import { SET_ACCESS_TOKEN, SET_REFRESH_TOKEN } from "../../Store/loginSlice";
 
 
 
@@ -44,7 +44,7 @@ const Login = () => {
           {
           accessToken: response.data.accessToken,
         }));
-        dispatch(SET_ACCESS_TOKEN(
+        dispatch(SET_REFRESH_TOKEN(
           {
             refreshToken: response.data.refreshToken,
           }));

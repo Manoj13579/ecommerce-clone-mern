@@ -26,6 +26,9 @@ const loginSlice = createSlice({
     SET_ACCESS_TOKEN: (state, action) => {
       state.accessToken = action.payload;
     },
+    SET_REFRESH_TOKEN: (state, action) => {
+      state.accessToken = action.payload;
+    },
     CLEAR_ACCESS_TOKEN: (state) => {
       state.accessToken = null;
       state.refreshToken = null;
@@ -46,5 +49,5 @@ const loginSlice = createSlice({
   }
 });
 
-export const { SET_ACCESS_TOKEN, CLEAR_ACCESS_TOKEN } = loginSlice.actions;
+export const { SET_ACCESS_TOKEN, SET_REFRESH_TOKEN, CLEAR_ACCESS_TOKEN } = loginSlice.actions;
 export default loginSlice.reducer;

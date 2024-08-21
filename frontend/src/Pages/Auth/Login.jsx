@@ -12,6 +12,7 @@ import { SET_ACCESS_TOKEN } from "../../Store/loginSlice";
 
 
 
+
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -41,8 +42,12 @@ const Login = () => {
         const { email, name, role, _id, createdAt, updatedAt, authProvider, photo } = response.data.user;
         dispatch(SET_ACCESS_TOKEN(
           {
-          accessToken: response.data.accessToken
+          accessToken: response.data.accessToken,
         }));
+        dispatch(SET_ACCESS_TOKEN(
+          {
+            refreshToken: response.data.refreshToken,
+          }));
         sessionStorage.setItem("userInfo", JSON.stringify({
           email, 
           name, 

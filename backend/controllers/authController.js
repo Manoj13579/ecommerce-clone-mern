@@ -160,6 +160,8 @@ const userslogin = async (req, res) => {
 
 const refreshToken = async (req, res) => {
   const { refreshToken } = req.cookies;
+  console.log(refreshToken);
+  
 
   if (!refreshToken) {
     return res.status(401).json({ success: false, message: "unauthorized" });

@@ -44,8 +44,8 @@ const userssignup = async (req, res) => {
 
    
     res.cookie("accessToken", accessToken, {
-     httpsOnly: true,
-      secure: false, // Use secure cookies in production
+     httpOnly: true,
+      secure: process.env.node_env === "production", // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
     });
 
@@ -60,8 +60,8 @@ const userssignup = async (req, res) => {
     await user.save();
 
     res.cookie("refreshToken", refreshToken, {
-     httpsOnly: true,
-      secure: false,
+     httpOnly: true,
+      secure: process.env.node_env === "production",
       sameSite: "none",
     });
 
@@ -115,8 +115,8 @@ const userslogin = async (req, res) => {
     );
 
     res.cookie("accessToken", accessToken, {
-     httpsOnly: true,
-      secure: false, // Use secure cookies in production
+     httpOnly: true,
+      secure: process.env.node_env === "production", // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks 
     });
 
@@ -130,10 +130,10 @@ const userslogin = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    //httpsOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
+    //httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
-     httpsOnly: true,
-      secure: false,
+     httpOnly: true,
+      secure: process.env.node_env === "production",
       sameSite: "none",
     });
     // Return response with new access token
@@ -202,15 +202,15 @@ const refreshToken = async (req, res) => {
       await user.save();
 
       res.cookie("accessToken", newAccessToken, {
-       httpsOnly: true,
-        secure: false,
+       httpOnly: true,
+        secure: process.env.node_env === "production",
         sameSite: "none",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
-       httpsOnly: true,
-        secure: false,
+       httpOnly: true,
+        secure: process.env.node_env === "production",
         sameSite: "none",
 
       });

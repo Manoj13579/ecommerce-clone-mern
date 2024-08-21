@@ -31,7 +31,7 @@ const Login = () => {
     setButtonDisabled(true);
     try {
       /*  { withCredentials: true } Send credentials (cookies) with the request.cookies sent.
-      safe approach.sincehttpsOnly: true, in token in backend javascript like document.cookies
+      safe approach.sincehttpOnly: true, in token in backend javascript like document.cookies
       can't access token so we have to pass it like this. we can.t access token here through
       javascript so sent like this*/
       // formData is defined as object above so can be sent without {}

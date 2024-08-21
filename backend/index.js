@@ -60,7 +60,7 @@ app.use(express.json());
 
 // Allow requests from localhost:5173 using for cookies to work
 const corsOptions = {
-  origin: "*",
+  origin: process.env.FRONTEND_URL,
   credentials: true, // Allow cookies to be sent
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
   };

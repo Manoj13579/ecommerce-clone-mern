@@ -32,11 +32,12 @@ app.use(session({
   /* Session Management: It’s normal for a session cookie to be set even if a user hasn’t logged in. This cookie is used to manage and identify the session throughout the user’s interaction with the application. creates 'connect.sid' stored in cookies. so setting saveUninitialized: true, is ok. no functions inside passport.js in Config are triggered.
 Session Data Handling: Although the cookie is created, it doesn’t mean that any sensitive user data is being stored until the user interacts with the application and the session is modified.
 Change saveUninitialized Setting:
-If you don’t want to create a session cookie for users who haven’t interacted with your application or logged in, set saveUninitialized to false. This way, a session is only created and saved when it contains data or has been modified. */
-  // store: MongoStore.create({
-  //   mongoUrl: process.env.MONGO_URI,
-  //   collectionName: 'sessions'
-  // }),
+If you don’t want to create a session cookie for users who haven’t interacted with your application or logged in, set C to false. This way, a session is only created and saved when it contains data or has been modified. */
+saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI,
+    collectionName: 'sessions'
+  }),
   cookie: {
     secure: process.env.NODE_ENV === "production", // Set to true in production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie

@@ -28,7 +28,7 @@ Store session data: Persist user session information across requests.
 Manage session state: Handle session-related operations such as starting, maintaining, and ending sessions.*/ 
 app.use(session({
   secret: process.env.SESSION_SECRET_KEY,
-  resave: false,
+  resave: true,
   /* Session Management: It’s normal for a session cookie to be set even if a user hasn’t logged in. This cookie is used to manage and identify the session throughout the user’s interaction with the application. creates 'connect.sid' stored in cookies. so setting saveUninitialized: true, is ok. no functions inside passport.js in Config are triggered.
 Session Data Handling: Although the cookie is created, it doesn’t mean that any sensitive user data is being stored until the user interacts with the application and the session is modified.
 Change saveUninitialized Setting:

@@ -45,7 +45,7 @@ const userssignup = async (req, res) => {
    
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+      secure: false, // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
     });
 
@@ -61,7 +61,7 @@ const userssignup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: "none",
     });
 
@@ -116,10 +116,8 @@ const userslogin = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-      sameSite: "none", // Prevent CSRF attacks
-      path: '/',
-      domain: '.onrender.com', 
+      secure: false, // Use secure cookies in production
+      sameSite: "none", // Prevent CSRF attacks 
     });
 
     const refreshToken = jwt.sign(
@@ -135,10 +133,8 @@ const userslogin = async (req, res) => {
     // httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: false,
       sameSite: "none",
-      path: '/',
-      domain: '.onrender.com',
     });
     // Return response with new access token
     return res.json({
@@ -207,18 +203,16 @@ const refreshToken = async (req, res) => {
 
       res.cookie("accessToken", newAccessToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         sameSite: "none",
-        path: '/',
-        domain: '.onrender.com',
+
       });
 
       res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: false,
         sameSite: "none",
-        path: '/',
-        domain: '.onrender.com',
+
       });
 
       res

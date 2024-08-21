@@ -118,6 +118,7 @@ const userslogin = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
+      path: '/' 
     });
 
     const refreshToken = jwt.sign(
@@ -135,6 +136,7 @@ const userslogin = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "none",
+      path: '/',
     });
     // Return response with new access token
     return res.json({
@@ -205,12 +207,14 @@ const refreshToken = async (req, res) => {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
+        path: '/',
       });
 
       res.cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "none",
+        path: '/',
       });
 
       res

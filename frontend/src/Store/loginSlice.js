@@ -29,6 +29,8 @@ const loginSlice = createSlice({
     },
     SET_REFRESH_TOKEN: (state, action) => {
       state.refreshToken = action.payload;
+      console.log(action.payload);
+      
     },
     CLEAR_ACCESS_TOKEN: (state) => {
       state.accessToken = null;

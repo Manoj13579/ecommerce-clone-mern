@@ -40,6 +40,8 @@ const Login = () => {
       
       if (response.data.success) {
         const { email, name, role, _id, createdAt, updatedAt, authProvider, photo } = response.data.user;
+        console.log('refrehToken', response.data.refrehToken);
+        
         dispatch(SET_ACCESS_TOKEN(
           {
           accessToken: response.data.accessToken,
@@ -47,6 +49,8 @@ const Login = () => {
         dispatch(SET_REFRESH_TOKEN(
           {
             refreshToken: response.data.refreshToken,
+            
+            
           }));
         sessionStorage.setItem("userInfo", JSON.stringify({
           email, 

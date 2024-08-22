@@ -45,7 +45,7 @@ const userssignup = async (req, res) => {
    
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-    secure: true, // Use secure cookies in production
+    secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS // Use secure cookies in production
       sameSite: "None", // Prevent CSRF attacks
     });
 
@@ -61,7 +61,7 @@ const userssignup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
       sameSite: "None",
     });
 
@@ -116,7 +116,7 @@ const userslogin = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-    secure: true, // Use secure cookies in production
+    secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS // Use secure cookies in production
       sameSite: "None", // Prevent CSRF attacks 
     });
 
@@ -133,7 +133,7 @@ const userslogin = async (req, res) => {
     //httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-    secure: true,
+    secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
       sameSite: "None",
     });
     // Return response with new access token
@@ -203,14 +203,14 @@ const refreshToken = async (req, res) => {
 
       res.cookie("accessToken", newAccessToken, {
        httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
         sameSite: "None",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
         // sameSite: "None" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
         sameSite: "None",
 
@@ -225,7 +225,7 @@ const refreshToken = async (req, res) => {
 
 // Logout
 const logout = async (req, res) => {
-  const { refreshToken } = req.cookies;
+  const { refreshToken, accessToken } = req.cookies;
 
   if (!refreshToken) {
     return res
@@ -235,16 +235,16 @@ const logout = async (req, res) => {
 
   try {
     await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
-    res.cookie("accessToken", newAccessToken, {
+    res.cookie("accessToken", {
       httpOnly: true,
-     secure: true,
+     secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
        sameSite: "None",
 
      });
 
-     res.cookie("refreshToken", newRefreshToken, {
+     res.cookie("refreshToken", {
       httpOnly: true,
-     secure: true,
+     secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
        sameSite: "None",
 
      });

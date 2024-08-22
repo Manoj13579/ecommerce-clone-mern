@@ -45,7 +45,7 @@ const userssignup = async (req, res) => {
    
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-      secure: false, // Use secure cookies in production
+      secure: process.env.NODE_ENV ==="production", // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
     });
 
@@ -61,7 +61,7 @@ const userssignup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV ==="production",
       sameSite: "none",
     });
 
@@ -116,7 +116,7 @@ const userslogin = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-      secure: false, // Use secure cookies in production
+      secure: process.env.NODE_ENV ==="production", // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks 
     });
 
@@ -133,7 +133,7 @@ const userslogin = async (req, res) => {
     //httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV ==="production",
       sameSite: "none",
     });
     // Return response with new access token
@@ -203,14 +203,15 @@ const refreshToken = async (req, res) => {
 
       res.cookie("accessToken", newAccessToken, {
        httpOnly: true,
-        secure: false,
+        secure: process.env.NODE_ENV ==="production",
         sameSite: "none",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
-        secure: false,
+        secure: process.env.NODE_ENV ==="production",
+        // sameSite: "none" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
         sameSite: "none",
 
       });

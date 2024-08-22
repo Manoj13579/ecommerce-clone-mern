@@ -19,6 +19,8 @@ import MongoStore from 'connect-mongo';
 import dotenv from 'dotenv';
 dotenv.config();
 const app = express();
+// sent coookie from frontend is parsed here first and used in app.use(session) and cors option credentials
+app.use(cookieParser());
 
 /* all app.use are middlewares. when user clicks for this port or whenever over any path user comes to this site the site passes only through index.js. so it should go through all these middlewares. these middleware kept here coz necessary whenever this page is called they have to go through these . e.g. app.use(cookieParser()); middleware The cookie-parser middleware parses the cookies attached to the client request object (req). When a request comes in, cookie-parser reads the cookies from the Cookie header and makes them available in req.cookies. If no cookies are sent with a request, the cookie-parser middleware will simply handle this gracefully without causing any issues. there are middleware that are always neede like cors and some may be needed or not like app.use(session  */
 // google auth keep it up here to work
@@ -54,7 +56,7 @@ app.use(passport.session());
 
 
 
-app.use(cookieParser());
+
 app.use(express.json());
 
 

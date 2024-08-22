@@ -46,7 +46,7 @@ const userssignup = async (req, res) => {
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
       secure: process.env.NODE_ENV ==="production", // Use secure cookies in production
-      sameSite: "none", // Prevent CSRF attacks
+      sameSite: "None", // Prevent CSRF attacks
     });
 
     const refreshToken = jwt.sign(
@@ -62,7 +62,7 @@ const userssignup = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
       secure: process.env.NODE_ENV ==="production",
-      sameSite: "none",
+      sameSite: "None",
     });
 
     return res.status(201).json({
@@ -117,7 +117,7 @@ const userslogin = async (req, res) => {
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
       secure: process.env.NODE_ENV ==="production", // Use secure cookies in production
-      sameSite: "none", // Prevent CSRF attacks 
+      sameSite: "None", // Prevent CSRF attacks 
     });
 
     const refreshToken = jwt.sign(
@@ -134,7 +134,7 @@ const userslogin = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
       secure: process.env.NODE_ENV ==="production",
-      sameSite: "none",
+      sameSite: "None",
     });
     // Return response with new access token
     return res.json({
@@ -204,15 +204,15 @@ const refreshToken = async (req, res) => {
       res.cookie("accessToken", newAccessToken, {
        httpOnly: true,
         secure: process.env.NODE_ENV ==="production",
-        sameSite: "none",
+        sameSite: "None",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
         secure: process.env.NODE_ENV ==="production",
-        // sameSite: "none" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
-        sameSite: "none",
+        // sameSite: "None" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
+        sameSite: "None",
 
       });
 

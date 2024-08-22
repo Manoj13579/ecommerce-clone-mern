@@ -43,7 +43,7 @@ saveUninitialized: false,
   cookie: {
     secure: process.env.NODE_ENV ==="production", // Set to true in production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
-    sameSite: "none", // Adjust as needed: 'lax', 'strict', or 'none'
+    sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
     maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day).for jwt set differently.
   },
 }));

@@ -16,7 +16,6 @@ export const getrefreshToken = createAsyncThunk('refreshToken/get', async () => 
 
 const initialState = {
   accessToken: null,
-  refreshToken: null,
   status: statusCode.IDLE
 };
 

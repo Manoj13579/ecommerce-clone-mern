@@ -7,7 +7,7 @@ passport.use(new OAuth2Strategy({
     clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
     
     scope: ['profile', 'email'],
-    callbackURL: '/auth/google/callback',
+    callbackURL: "https://ecommerce-clone-mern-backend.onrender.com/auth/google/callback",
     
 },
 

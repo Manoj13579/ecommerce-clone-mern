@@ -225,7 +225,7 @@ const refreshToken = async (req, res) => {
 
 // Logout
 const logout = async (req, res) => {
-  const { refreshToken, accessToken } = req.cookies;
+  const { refreshToken } = req.cookies;
 
   if (!refreshToken) {
     return res
@@ -239,14 +239,14 @@ const logout = async (req, res) => {
       httpOnly: true,
      secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
        sameSite: "None",
-
+       expires: new Date(0)
      });
 
      res.cookie("refreshToken", {
       httpOnly: true,
      secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
        sameSite: "None",
-
+       expires: new Date(0)
      });
     res.status(200).json({ success: true, message: "Successfully logged out" });
   } catch (error) {

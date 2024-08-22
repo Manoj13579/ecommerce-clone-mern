@@ -34,7 +34,7 @@ saveUninitialized: false,
     collectionName: 'sessions'
   }),
   cookie: {
-  secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
+  secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
     maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day).for jwt set differently.
@@ -48,7 +48,7 @@ app.use(passport.session());
 
 
 /*sent coookie from frontend is parsed here first and used in jwt. session doesnot need this but jwt does so compulsory to use it. cookie attributes like cookie: {
-  secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS // Set to true in production with HTTPS
+  secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS // Set to true in production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
     maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day).for jwt set differently.

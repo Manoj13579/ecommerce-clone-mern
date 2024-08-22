@@ -13,8 +13,6 @@ import session from 'express-session';
 import passport from 'passport';
 import './Config/passport.js';
 import MongoStore from 'connect-mongo';
-
-
 // for using .env
 import dotenv from 'dotenv';
 dotenv.config();

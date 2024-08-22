@@ -72,12 +72,13 @@ const Layout = () => {
 
   const handleLogout = async () => {
     try {
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/logout`, {}, { withCredentials: true });
-        sessionStorage.removeItem('userInfo');
-        dispatch(CLEAR_ACCESS_TOKEN());
-        toast.success("Logged out successfully");
-        navigate('/login');
-      
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/logout`, {}, { withCredentials: true });
+        if(response.data.success) {
+          sessionStorage.removeItem('userInfo');
+          dispatch(CLEAR_ACCESS_TOKEN());
+          toast.success("Logged out successfully");
+          navigate('/login');
+        }
 
     } 
     catch (error) {

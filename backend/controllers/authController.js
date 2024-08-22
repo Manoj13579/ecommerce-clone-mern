@@ -210,7 +210,8 @@ const refreshToken = async (req, res) => {
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
-      secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
+       // Set to true automatically when in .env set to production with HTTPS
+      secure: process.env.NODE_ENV,
         // sameSite: "None" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
         sameSite: "None",
 
@@ -235,19 +236,8 @@ const logout = async (req, res) => {
 
   try {
     await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
-    res.cookie("accessToken", {
-      httpOnly: true,
-     secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
-       sameSite: "None",
-       expires: new Date(0)
-     });
-
-     res.cookie("refreshToken", {
-      httpOnly: true,
-     secure: process.env.NODE_ENV, // Set to true automatically when in .env set to production with HTTPS
-       sameSite: "None",
-       expires: new Date(0)
-     });
+    res.clearCookie("accessToken");
+    res.clearCookie("refreshToken");
     res.status(200).json({ success: true, message: "Successfully logged out" });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

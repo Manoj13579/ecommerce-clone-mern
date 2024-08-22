@@ -45,7 +45,7 @@ const userssignup = async (req, res) => {
    
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-      secure: process.env.node_env === "production", // Use secure cookies in production
+      secure: false, // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks
     });
 
@@ -61,7 +61,7 @@ const userssignup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-      secure: process.env.node_env === "production",
+      secure: false,
       sameSite: "none",
     });
 
@@ -116,7 +116,7 @@ const userslogin = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-      secure: process.env.node_env === "production", // Use secure cookies in production
+      secure: false, // Use secure cookies in production
       sameSite: "none", // Prevent CSRF attacks 
     });
 
@@ -133,7 +133,7 @@ const userslogin = async (req, res) => {
     //httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-      secure: process.env.node_env === "production",
+      secure: false,
       sameSite: "none",
     });
     // Return response with new access token
@@ -203,14 +203,14 @@ const refreshToken = async (req, res) => {
 
       res.cookie("accessToken", newAccessToken, {
        httpOnly: true,
-        secure: process.env.node_env === "production",
+        secure: false,
         sameSite: "none",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
-        secure: process.env.node_env === "production",
+        secure: false,
         sameSite: "none",
 
       });

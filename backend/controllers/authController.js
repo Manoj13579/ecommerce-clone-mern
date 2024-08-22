@@ -45,7 +45,7 @@ const userssignup = async (req, res) => {
    
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-    Secure: true, // Use secure cookies in production
+    secure: true, // Use secure cookies in production
       sameSite: "None", // Prevent CSRF attacks
     });
 
@@ -61,7 +61,7 @@ const userssignup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-    Secure: true,
+    secure: true,
       sameSite: "None",
     });
 
@@ -116,7 +116,7 @@ const userslogin = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-    Secure: true, // Use secure cookies in production
+    secure: true, // Use secure cookies in production
       sameSite: "None", // Prevent CSRF attacks 
     });
 
@@ -133,7 +133,7 @@ const userslogin = async (req, res) => {
     //httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-    Secure: true,
+    secure: true,
       sameSite: "None",
     });
     // Return response with new access token
@@ -203,14 +203,14 @@ const refreshToken = async (req, res) => {
 
       res.cookie("accessToken", newAccessToken, {
        httpOnly: true,
-      Secure: true,
+      secure: true,
         sameSite: "None",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
-      Secure: true,
+      secure: true,
         // sameSite: "None" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
         sameSite: "None",
 

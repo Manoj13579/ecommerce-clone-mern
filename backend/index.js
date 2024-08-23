@@ -80,7 +80,7 @@ app.use(cors(corsOptions));
 /*Multer handles file uploads and stores the files in the specified directory.
 express.static makes the files in that directory accessible over HTTP.Access File:
 To access the image, you can make a request to http://yourdomain.com/images/filename.jpg.
-In summary, including app.use('/images', express.static('uploads/images')); is necessary if you want to allow clients to access and view the uploaded files directly through your server. Without this middleware, uploaded files will be stored on the server, but there won't be a direct way to access them via HTTP requests. */
+In summary, including app.use('/images', express.static('uploads/images')); is necessary if you want to allow clients to access and view the uploaded files directly through your server. Without this middleware, uploaded files will be stored on the server, but there won't be a direct way to access them via HTTP requests. if we use static means html in express we have to use xpress.static*/
 // use this only in saving image in server not in cloud storage
 // app.use('/images', express.static('uploads/images'));
 

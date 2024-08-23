@@ -39,16 +39,16 @@ async (accessToken, refreshToken, profile, done) => {
         done(error);
     }
 }));
-// serialize sends user id to session in index.js
+// serialize gets data from passport . we are sending user to session in index.js
 passport.serializeUser((user, done) => {
     console.log('serializeUser user', user);
     
-    done(null, user);
+    done(null, user.id);
 });
 
-// deserialize retrieves user id from session
-passport.deserializeUser(async (user, done) => {
-    const { id } = user ;
+// deserialize retrieves user from session
+passport.deserializeUser(async (id, done) => {
+    
     console.log('deserializeUser user', id);
     try {
         const user = await Users.findById(id);

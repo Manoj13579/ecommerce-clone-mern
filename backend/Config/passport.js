@@ -47,17 +47,30 @@ passport.serializeUser((user, done) => {
 });
 
 // deserialize retrieves user data from session
-passport.deserializeUser(async (id, done) => {
+// passport.deserializeUser(async (id, done) => {
     
-    console.log('deserializeUser user', id);
-    try {
-        const user = await Users.findById(id);
-        done(null, user);
-    } catch (error) {
-        done(error);
-    }
-});
+//     console.log('deserializeUser user', id);
+//     try {
+//         const user = await Users.findById(id);
+//         done(null, user);
+//     } catch (error) {
+//         done(error);
+//     }
+// });
 
+
+passport.deserializeUser(async (id, done) => {
+    console.log('Attempting to deserialize user with id:', id);
+    try {
+      const user = await Users.findById(id);
+      console.log('User found in deserialization:', user); // This should log the user object if found
+      done(null, user);
+    } catch (error) {
+      console.error('Error in deserialization:', error);
+      done(error);
+    }
+  });
+  
 
 export const googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });
 

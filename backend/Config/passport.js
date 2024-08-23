@@ -1,4 +1,4 @@
-import passport from 'passport';
+import passport, { serializeUser } from 'passport';
 import { Strategy as OAuth2Strategy } from 'passport-google-oauth2';
 import Users from '../models/users.js';
 
@@ -8,7 +8,7 @@ passport.use(new OAuth2Strategy({
     clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
     
     scope: ['profile', 'email'],
-    callbackURL: "https://ecommerce-clone-mern-backend.onrender.com/auth/google/callback",
+    callbackURL: "/auth/google/callback",
     
 },
 
@@ -40,6 +40,7 @@ async (accessToken, refreshToken, profile, done) => {
     }
 }));
 passport.serializeUser((user, done) => {
+    console.log('serializeUser user', user);
     
     done(null, user.id);
 });
@@ -48,6 +49,7 @@ passport.deserializeUser(async (id, done) => {
     
     try {
         const user = await Users.findById(id);
+    console.log('deserializeUser user', user);
         done(null, user);
     } catch (error) {
         done(error);

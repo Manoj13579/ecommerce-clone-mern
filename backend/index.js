@@ -50,7 +50,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  console.log('User in session:', req.user);
+  console.log('User in session:', req._id);
   next();
 });
 /*sent coookie from frontend is parsed here first and used in jwt. session doesnot need this but jwt does so compulsory to use it. cookie attributes like cookie: {

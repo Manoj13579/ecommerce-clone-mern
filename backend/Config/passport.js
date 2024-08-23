@@ -1,4 +1,4 @@
-import passport, { serializeUser } from 'passport';
+import passport from 'passport';
 import { Strategy as OAuth2Strategy } from 'passport-google-oauth2';
 import Users from '../models/users.js';
 

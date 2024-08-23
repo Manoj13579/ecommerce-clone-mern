@@ -49,7 +49,10 @@ passport.session() integrates Passport with session management. It allows Passpo
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.use((req, res, next) => {
+  console.log('User in session:', req.user);
+  next();
+});
 /*sent coookie from frontend is parsed here first and used in jwt. session doesnot need this but jwt does so compulsory to use it. cookie attributes like cookie: {
   secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS // Set to true in production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie

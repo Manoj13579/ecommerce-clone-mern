@@ -75,6 +75,11 @@ const corsOptions = {
   };
 app.use(cors(corsOptions));
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
 
 
 /*Multer handles file uploads and stores the files in the specified directory.

@@ -28,6 +28,24 @@ const app = express();
   app.use(cookieParser());
 app.use(express.json());
 
+
+
+// Allow requests from localhost:5173 using for cookies to work
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true, // Allow cookies to be sent
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH'], // Allowed methods
+  };
+app.use(cors(corsOptions));
+
+
+
+/*Multer handles file uploads and stores the files in the specified directory.
+express.static makes the files in that directory accessible over HTTP.Access File:
+To access the image, you can make a request to http://yourdomain.com/images/filename.jpg.
+In summary, including app.use('/images', express.static('uploads/images')); is necessary if you want to allow clients to access and view the uploaded files directly through your server. Without this middleware, uploaded files will be stored on the server, but there won't be a direct way to access them via HTTP requests. */
+// use this only in saving image in server not in cloud storage
+// app.use('/images', express.static('uploads/images'));
 /* all app.use are middlewares. when user clicks for this port or whenever over any path user comes to this site the site passes only through index.js. so it should go through all these middlewares. these middleware kept here coz necessary whenever this page is called they have to go through these . e.g. app.use(cookieParser()); middleware The cookie-parser middleware parses the cookies attached to the client request object (req). When a request comes in, cookie-parser reads the cookies from the Cookie header and makes them available in req.cookies. If no cookies are sent with a request, the cookie-parser middleware will simply handle this gracefully without causing any issues. there are middleware that are always neede like cors and some may be needed or not like app.use(session  */
 /* The app.use(session({}})) only coz google auth using passport.js needs this. we are using jwt auth and jwt is good than session based auth coz jwt doesnot need to go to database for every auth but in my auth in jwt i have used refreshToken to be compared from database. express session always needs to go to database for confirming every request from frontend in authenticated or not(so using too much request to n from database) and gets session id and this id has time when this session ends or token is invalid. session is also used to get user data and prefrences and stored in  database using MongoStore and fetched that data. here we just used MongoStore so no error is thrown coz if saved in browser store not good and warns us in deployment.*/ 
 app.use(session({
@@ -65,19 +83,7 @@ app.use((req, res, next) => {
 
 
 
-// Allow requests from localhost:5173 using for cookies to work
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  credentials: true, // Allow cookies to be sent
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'PATCH'], // Allowed methods
-  };
-app.use(cors(corsOptions));
-/*Multer handles file uploads and stores the files in the specified directory.
-express.static makes the files in that directory accessible over HTTP.Access File:
-To access the image, you can make a request to http://yourdomain.com/images/filename.jpg.
-In summary, including app.use('/images', express.static('uploads/images')); is necessary if you want to allow clients to access and view the uploaded files directly through your server. Without this middleware, uploaded files will be stored on the server, but there won't be a direct way to access them via HTTP requests. */
-// use this only in saving image in server not in cloud storage
-// app.use('/images', express.static('uploads/images'));
+
 
 
 // importing connection string.connection to mongo db atlas

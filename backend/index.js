@@ -41,6 +41,7 @@ saveUninitialized: false,
   secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
+    path: '/',
     maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day).for jwt set differently.
     autoRemove: 'native', // Automatically remove expired sessions from database
   },

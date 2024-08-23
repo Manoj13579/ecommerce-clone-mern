@@ -2,6 +2,7 @@ import passport from 'passport';
 import { Strategy as OAuth2Strategy } from 'passport-google-oauth2';
 import Users from '../models/users.js';
 
+/* from handleGoogleLogIn url it comes here and passport sends to gmail id and secret and if user login and these correct gmail sends 'profile', 'email' along with tokens. tokens are handled by passport below  */
 passport.use(new OAuth2Strategy({
     clientID: process.env.GOOGLE_AUTH_CLIENT_ID,
     clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,

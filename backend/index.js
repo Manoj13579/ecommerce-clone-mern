@@ -81,6 +81,7 @@ app.use((err, req, res, next) => {
 });
 
 
+app.set('trust proxy', 1); // Trust first proxy (e.g., Render's proxy)
 
 /*Multer handles file uploads and stores the files in the specified directory.
 express.static makes the files in that directory accessible over HTTP.Access File:

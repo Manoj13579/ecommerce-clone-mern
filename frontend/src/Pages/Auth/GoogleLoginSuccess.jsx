@@ -13,7 +13,7 @@ const GoogleLoginSuccess = () => {
   const fetchUserData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/login/success`, {}, { withCredentials: true });
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/login/success`, { withCredentials: true });
       if (response.data.success) {
         const { email, name, role, _id, createdAt, updatedAt, authProvider, photo } = response.data.user;
         sessionStorage.setItem("userInfo", JSON.stringify({

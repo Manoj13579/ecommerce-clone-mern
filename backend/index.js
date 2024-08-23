@@ -38,7 +38,7 @@ saveUninitialized: false,
     collectionName: 'sessions'
   }),
   cookie: {
-  secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS
+  secure: true, // Set to true automatically when in .env set to production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
     path: '/',
@@ -53,7 +53,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use((req, res, next) => {
-  console.log('Incoming request with cookies:', req.cookies);
   console.log('Session data:', req.session);
   next();
 });

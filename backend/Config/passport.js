@@ -64,7 +64,7 @@ export const googleAuthCallback = passport.authenticate('google', {
 
 
 export const userInfo = (req, res) => {
-    
+    console.log('User Info:', req.user);
     const { password, ...sanitizedUser } = req.user.toObject();
     if(req.user) {
         

@@ -39,12 +39,14 @@ async (accessToken, refreshToken, profile, done) => {
         done(error);
     }
 }));
+// serialize sends user data to session in index.js
 passport.serializeUser((user, done) => {
     console.log('serializeUser user', user);
     
     done(null, user.id);
 });
 
+// deserialize retrieves user data from session
 passport.deserializeUser(async (id, done) => {
     
     console.log('deserializeUser user', id);
@@ -60,8 +62,8 @@ passport.deserializeUser(async (id, done) => {
 export const googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });
 
 export const googleAuthCallback = passport.authenticate('google', {
-            successRedirect: (`${process.env.FRONTEND_URL}/google-login-success`),
-            failureRedirect: (`${process.env.FRONTEND_URL}/login)`)
+            successRedirect: `${process.env.FRONTEND_URL}/google-login-success`,
+            failureRedirect: `${process.env.FRONTEND_URL}/login)`
         });
 
 

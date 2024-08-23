@@ -43,33 +43,23 @@ async (accessToken, refreshToken, profile, done) => {
 passport.serializeUser((user, done) => {
     console.log('serializeUser user', user);
     
-    done(null, user.id);
+    done(null, user);
 });
 
 // deserialize retrieves user id from session
-// passport.deserializeUser(async (id, done) => {
-    
-//     console.log('deserializeUser user', id);
-//     try {
-//         const user = await Users.findById(id);
-//         done(null, user);
-//     } catch (error) {
-//         done(error);
-//     }
-// });
-
-
-passport.deserializeUser(async (id, done) => {
-    console.log('Attempting to deserialize user with id:', id);
+passport.deserializeUser(async (user, done) => {
+    const { id } = user ;
+    console.log('deserializeUser user', id);
     try {
-      const user = await Users.findById(id);
-      console.log('User found in deserialization:', user); // This should log the user object if found
-      done(null, user);
+        const user = await Users.findById(id);
+        done(null, user);
     } catch (error) {
-      console.error('Error in deserialization:', error);
-      done(error);
+        done(error);
     }
-  });
+});
+
+
+
   
 
 export const googleAuth = passport.authenticate('google', { scope: ['profile', 'email'] });

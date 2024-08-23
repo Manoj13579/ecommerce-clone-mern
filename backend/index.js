@@ -32,13 +32,13 @@ The secret is used to create a signature for this session ID cookie. The signatu
 Session Data Handling: Although the cookie is created, it doesn’t mean that any sensitive user data is being stored until the user interacts with the application and the session is modified.
 Change saveUninitialized Setting:
 If you don’t want to create a session cookie for users who haven’t interacted with your application or logged in, set C to false. This way, a session is only created and saved when it contains data or has been modified. */
-saveUninitialized: true,
+saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI,
     collectionName: 'sessions'
   }),
   cookie: {
-  secure: true,
+  secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
     maxAge: 24 * 60 * 60 * 1000, // Cookie expiration time (1 day).for jwt set differently.

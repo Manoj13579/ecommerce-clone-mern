@@ -39,13 +39,13 @@ const verifyEsewaResponse = async (req, res) => {
             // Generate the signature string from the signed_field_names order
             
             const message = decodedData.signed_field_names.split(',').map((field) => `${field}=${decodedData[field] || ""}`).join(',');
-    console.log('message', message);
+    
     
             // Compute the signature using HMAC SHA256 and your secret key
             const secretKey = process.env.ESEWA_SECRET_KEY;
             const computedHash = CryptoJS.HmacSHA256(message, secretKey);
             const computedSignature = CryptoJS.enc.Base64.stringify(computedHash);
-    console.log('computedSignature', computedSignature);
+    
     
             // Compare the received signature with the computed signature
             if (computedSignature === decodedData.signature) {

@@ -141,7 +141,7 @@ const userslogin = async (req, res) => {
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "None",
     });
 
     const refreshToken = jwt.sign(
@@ -157,7 +157,7 @@ const userslogin = async (req, res) => {
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "None",
     });
 
     // Return response with new access token

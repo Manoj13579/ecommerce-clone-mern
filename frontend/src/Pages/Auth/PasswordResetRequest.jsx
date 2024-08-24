@@ -15,7 +15,7 @@ const PasswordResetRequest = () => {
     setButtonDisabled(true);
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/request-passwordreset`, { email });
-      toast.success(response.data.message);
+      toast.success(response.data.message, {autoClose: false, position: 'top-center'});
     } catch (error) {
       toast.error( "Something went wrong");
       console.log(error.response?.data?.message)

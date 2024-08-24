@@ -113,8 +113,8 @@ const userslogin = async (req, res) => {
       user.loginAttempts += 1;
 
       // Lock the account if attempts exceed the maximum limit
-      if (user.loginAttempts >= 3) {
-        user.lockUntil = new Date(Date.now() + 2 * 60 * 1000); // Lock for 1 day
+      if (user.loginAttempts >= 6) {
+        user.lockUntil = new Date(Date.now() + 24 * 60 * 60 * 1000); // Lock for 1 day
         user.loginAttempts = 0; // Reset login attempts after locking
       }
 

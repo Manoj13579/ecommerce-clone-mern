@@ -1,5 +1,5 @@
-const acessTokenExpiryDate = "30s";
-const refreshTokenExpiryDate = "7d";
+const acessTokenExpiryDate = "15m";
+const refreshTokenExpiryDate = "1d";
 const resetTokenExpiryDate = "1h";
 
 

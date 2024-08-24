@@ -43,7 +43,7 @@ saveUninitialized: false,
     httpOnly: true, // Helps to prevent client-side scripts from accessing the cookie
     sameSite: "None", // Adjust as needed: 'lax', 'strict', or 'none'
     path: '/',
-    maxAge: 2 * 60 * 60 * 1000, // Cookie expiration time (2 hour).for jwt set differently.
+    maxAge: 3 * 60 * 60 * 1000, // Cookie expiration time (3 hour).for jwt set differently.
     autoRemove: 'native', // Automatically remove expired sessions from database
   },
 }));

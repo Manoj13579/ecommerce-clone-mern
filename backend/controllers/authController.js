@@ -317,7 +317,7 @@ const requestPasswordReset = async (req, res) => {
       to: user.email, // Recipient's email address
       subject: "Password Reset", // Email subject
       /* http://localhost:5173/reset-password is the URL that users will be directed when they click link inside their email. In deployment, need to change http://localhost:5173 */
-      text: `http://localhost:5173/reset-password?token=${resetToken}&email=${req.body.email}`,
+      text: `${process.env.FRONTEND_URL}/reset-password?token=${resetToken}&email=${req.body.email}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {

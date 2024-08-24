@@ -63,7 +63,7 @@ const Login = () => {
         navigate(response.data.user.role === "user" ? "/cart" : "/adminlayout");
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (error.response && error.response.status === 400 || error.response && error.response.status === 403) {
         toast.error(error.response.data.message)
       }
       else {

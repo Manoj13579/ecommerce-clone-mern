@@ -136,6 +136,7 @@ const PaypalPayment = () => {
         try {
           await saveOrder(userorder);
           localStorage.removeItem("cart");
+          localStorage.removeItem("order");
           dispatch(resetCart());
           // cam customize tast for single page too
           toast.success(`Transaction ${transaction.status}: ${transaction.id}, Order successfully placed with paypal payment`, { autoClose: false, position: 'top-center' });;

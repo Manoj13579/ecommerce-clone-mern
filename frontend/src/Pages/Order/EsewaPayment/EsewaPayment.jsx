@@ -17,8 +17,8 @@ const EsewaPaymentOrder = () => {
     product_code: 'EPAYTEST',
     product_service_charge: '0',
     product_delivery_charge: '0',
-    success_url: 'http://localhost:5173/verify-esewa-response',
-    failure_url: 'http://localhost:5173/',
+    success_url: 'https://ecommerce-clone-mern-frontendend.onrender.com/verify-esewa-response',
+    failure_url: 'https://ecommerce-clone-mern-frontend.onrender.com/',
     signature: 'total_amount,transaction_uuid,product_code'
   });
 

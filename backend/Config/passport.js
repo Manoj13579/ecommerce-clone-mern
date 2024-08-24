@@ -46,14 +46,11 @@ passport.use(
 );
 // serialize gets data from passport . we are sending user to session in index.js
 passport.serializeUser((user, done) => {
-  console.log("serializeUser user", user);
-
   done(null, user.id);
 });
 
 // deserialize retrieves user from session
 passport.deserializeUser(async (id, done) => {
-  console.log("deserializeUser user", id);
   try {
     const user = await Users.findById(id);
     done(null, user);
@@ -72,7 +69,7 @@ export const googleAuthCallback = passport.authenticate("google", {
 });
 
 export const userInfo = (req, res) => {
-  console.log("User Info:", req.user);
+  
   const { password, ...sanitizedUser } = req.user.toObject();
   if (req.user) {
     res

@@ -184,7 +184,6 @@ const userslogin = async (req, res) => {
 
 const refreshToken = async (req, res) => {
   const { refreshToken } = req.cookies;
-  console.log('refreshToken', refreshToken);
   
 
   if (!refreshToken) {

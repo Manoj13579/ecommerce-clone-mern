@@ -25,7 +25,29 @@ const UserProfileEdit = () => {
 
   const inputRef = useRef();
   const navigate = useNavigate();
+// 1 MB in bytes
+const MAX_FILE_SIZE = 1 * 1024 * 1024;
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      /*The string 'image/jpeg' is a MIME type (Multipurpose Internet Mail Extensions type) used to specify the type of a file or data. MIME types are a way to tell the browser or server about the nature and format of a file or data being handled.
+MIME Type: 'image/jpeg'
+image: Indicates that the data is an image.
+jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photographic Experts Group). */
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      // file.type is here image type like image/jpeg
+      if (!allowedTypes.includes(file.type)) {
+        toast.error('Invalid file type. Only JPEG, JPG, and PNG are allowed.');
+        return;
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error('File size should be less than 1 MB');
+        return;
+      }
+      setFormData({ ...formData, photo: file})
+    }
+  };
   
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,11 +55,12 @@ const UserProfileEdit = () => {
 
     
     try {
-      /* set photoUrl = null coz sending  const updatedFormData = { 
+      /* set photoUrl = null in above form coz sending  const updatedFormData = { 
   ...formData,
       photo: photoUrl...
       in below won't throw error coz photoUrl is defined and updatedFormData is send in await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/userloginuploads.... proceeds without photo upload */ 
-      let photoUrl = null;
+      // if the user didn't upload a new photo, keep the old one.
+      let photoUrl = userinfo.photo;
       /* here using if (formData.photo) coz if no image uploaded in register so that still can proceed above. only if there is photo uploaded then only uploading with backend starts otherwise proceeds without it*/
       if(formData.photo) {
 // when uploading file only could be sent through formData format to backend
@@ -69,8 +92,7 @@ photoUrl = photoUploadResponse.data.data.secure_url;
           const updatedUserInfo = {
             ...userinfo,
             email: updatedFormData.email,
-            // if the user didn't upload a new photo, keep the old one. if no photo in upload remove || userinfo.photo
-            photo: photoUrl || userinfo.photo
+            photo: photoUrl
         };
         // Store the updated user info back into session storage in same name'userInfo'
     sessionStorage.setItem('userInfo', JSON.stringify(updatedUserInfo));
@@ -141,12 +163,14 @@ photoUrl = photoUploadResponse.data.data.secure_url;
             />
           </div>
           <p>Upload Image</p>
+          <p className="auth-form-upload-text">image upload is optional</p>
+          <p className="auth-form-upload-text">image types allowed: jpeg|jpg|png</p>
+            <p className="auth-form-upload-text">image size shouldn't exceed 1 mb</p>
             <label htmlFor="file-input">
               {/* create url temporarily from image in local storage. creates own url and bcoz of this we see selected image in upload field */}
               <img src= {formData.photo? URL.createObjectURL(formData.photo): upload_image} className="form-register-addproduct-thumbnail-img"/>
               <input type = "file" 
-              onChange = {(e) => setFormData({ ...formData, photo: e.target.files[0]})
-              }
+              onChange={handleFileChange}
               id="file-input"
               hidden
               />

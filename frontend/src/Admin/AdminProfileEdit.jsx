@@ -59,7 +59,8 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
   ...formData,
       photo: photoUrl...
       in below won't throw error coz photoUrl is defined and updatedFormData is send in await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/userloginupload.... proceeds without photo upload */ 
-      let photoUrl = null;
+      // if the user didn't upload a new photo, keep the old one
+      let photoUrl = userinfo.photo;
       /* here using if (formData.photo) coz if no image uploaded in register so that still can proceed above. only if there is photo uploaded then only uploading with backend starts otherwise proceeds without it*/
       if(formData.photo) {
       // when uploading file only could be sent through formData format to backend
@@ -88,8 +89,8 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
            const updatedUserInfo = {
             ...userinfo,
             email: updatedFormData.email,
-            // if the user didn't upload a new photo, keep the old one
-            photo: photoUrl || userinfo.photo 
+            
+            photo: photoUrl
         };
         // Store the updated user info back into session storage in same name'userInfo'
     sessionStorage.setItem('userInfo', JSON.stringify(updatedUserInfo));
@@ -163,9 +164,9 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
               className="admin-profile-toggle-password"
             />
           </div>
-          <p className="adminproduct-form-upload-text">image upload is optional</p>
-          <p className="adminproduct-form-upload-text">image types allowed: jpeg|jpg|png.</p>
-            <p className="adminproduct-form-upload-text">image size shouldn't exceed 1 mb</p>
+          <p className="admin-profile-form-upload-text">image upload is optional</p>
+          <p className="admin-profile-form-upload-text">image types allowed: jpeg|jpg|png.</p>
+            <p className="admin-profile-form-upload-text">image size shouldn't exceed 1 mb</p>
             <label htmlFor="file-input">
               {/* create url temporarily from image in local storage. creates own url and bcoz of this we see selected image in upload field */}
               <img src= {formData.photo? URL.createObjectURL(formData.photo): upload_image} className="adminproduct-addproduct-thumbnail-img"/>

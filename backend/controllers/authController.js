@@ -45,7 +45,7 @@ const userssignup = async (req, res) => {
    
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS // Use secure cookies in production
+    secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
       sameSite: "None", // Prevent CSRF attacks
     });
 
@@ -61,7 +61,7 @@ const userssignup = async (req, res) => {
 
     res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS
+    secure: process.env.NODE_ENV === 'production', 
       sameSite: "None",
     });
 
@@ -86,7 +86,6 @@ const userssignup = async (req, res) => {
 };
 
 const userslogin = async (req, res) => {
-  // auth cycle 1: after login user contains data about user including role
   try {
     const user = await Users.findOne({ email: req.body.email, authProvider: "jwt" });
 
@@ -96,18 +95,43 @@ const userslogin = async (req, res) => {
         .json({ success: false, message: "Wrong email or password" });
     }
 
-    // Compare the plaintext password with the hashed password
-    /*here await shows ... still should be using await because bcrypt.compare is an asynchronous function. Without await, the comparePass variable will not hold the correct result of the password comparison, leading to the condition where any password is accepted. */
+    // Check if the account is currently locked
+    if (user.lockUntil && user.lockUntil > Date.now()) {
+      return res
+        .status(403)
+        .json({ success: false, message: "Account is locked. Please try again later." });
+    }
+
+    /**
+     * Compare the plaintext password with the hashed password
+     * Here await shows ... still should be using await because bcrypt.compare is an asynchronous function. 
+     * Without await, the comparePass variable will not hold the correct result of the password comparison, leading to the condition where any password is accepted.
+     */
     const comparePass = await bcrypt.compare(req.body.password, user.password);
     if (!comparePass) {
+      // Increment login attempts
+      user.loginAttempts += 1;
+
+      // Lock the account if attempts exceed the maximum limit
+      if (user.loginAttempts >= 6) {
+        user.lockUntil = new Date(Date.now() + 24 * 60 * 60 * 1000); // Lock for 1 day
+        user.loginAttempts = 0; // Reset login attempts after locking
+      }
+
+      await user.save();
       return res
         .status(400)
         .json({ success: false, message: "Wrong email or password" });
     }
 
-    //Generate accessToken. contains user info role and id which determines role based auth
-    // auth cycle 2: sends role user or admin data along with id and token goes to authMiddleware authenticateToken
+    // Reset loginAttempts and lockUntil on successful login
+    user.loginAttempts = 0;
+    user.lockUntil = null;
+    await user.save();
 
+    /*Generate accessToken. contains user info role and id which determines role based auth
+     * Auth cycle 2: sends role user or admin data along with id and token goes to authMiddleware authenticateToken
+     */
     const accessToken = jwt.sign(
       { id: user.id, role: user.role },
       process.env.ACCESS_TOKEN_SECRET,
@@ -115,9 +139,9 @@ const userslogin = async (req, res) => {
     );
 
     res.cookie("accessToken", accessToken, {
-     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS // Use secure cookies in production
-      sameSite: "None", // Prevent CSRF attacks 
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
     });
 
     const refreshToken = jwt.sign(
@@ -130,12 +154,12 @@ const userslogin = async (req, res) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    //httpOnly: true ensures javascript(document.cookie/cookies-parser) cannot access token
     res.cookie("refreshToken", refreshToken, {
-     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS
-      sameSite: "None",
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
     });
+
     // Return response with new access token
     return res.json({
       success: true,
@@ -203,16 +227,15 @@ const refreshToken = async (req, res) => {
 
       res.cookie("accessToken", newAccessToken, {
        httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS
+      secure: process.env.NODE_ENV === 'production', 
         sameSite: "None",
 
       });
 
       res.cookie("refreshToken", newRefreshToken, {
        httpOnly: true,
-       // Set to true automatically when in .env set to production with HTTPS
-      secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS
-        // sameSite: "None" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests.
+      secure: process.env.NODE_ENV === 'production',
+        /* sameSite: "None" is required for cross-origin requests. Since your frontend and backend are on different domains, this setting is necessary to allow the cookies to be sent with requests. */
         sameSite: "None",
 
       });
@@ -238,13 +261,13 @@ const logout = async (req, res) => {
     await Users.findOneAndUpdate({ refreshToken }, { refreshToken: null });
     res.clearCookie("accessToken", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS
+      secure: process.env.NODE_ENV === 'production', 
       sameSite: "None",
       path: '/'
     });
     res.clearCookie("refreshToken", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Set to true automatically when in .env set to production with HTTPS // Set to true automatically when in .env set to production with HTTPS
+      secure: process.env.NODE_ENV === 'production', 
       sameSite: "None",
       path: '/'
     });
@@ -276,19 +299,19 @@ const requestPasswordReset = async (req, res) => {
 
     
     // To send email from admin to user. Here, Gmail and nodemailer module are used
-    // Purpose: This is used to authenticate with the email service (Gmail in this case). It tells Nodemailer which email account to use for sending emails.
+    /* Purpose: This is used to authenticate with the email service (Gmail in this case). It tells Nodemailer which email account to use for sending emails.*/
     // Usage: This should be set to the email address that you own and have access to, from which you will send emails.
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        // When using Gmail, it is highly recommended to use an App-Specific Password instead of your actual Gmail password. This enhances security and allows you to revoke access without changing your main Gmail password.
+        /* When using Gmail, it is highly recommended to use an App-Specific Password instead of your actual Gmail password. This enhances security and allows you to revoke access without changing your main Gmail password. */
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
 
     // Sender and receiver of email containing resetUrl
-    // This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <ecommerceclone@mail.com>. only shows "Ecommerce Clone"
+    /*This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <ecommerceclone@mail.com>. only shows "Ecommerce Clone"*/
     const mailOptions = {
       from:  '"Ecommerce Clone" <ecommerceclone@mail.com>', 
       to: user.email, // Recipient's email address
@@ -361,19 +384,19 @@ const jwtEmailConfirmation = async (req, res) => {
 
     
     // To send email from admin to user. Here, Gmail and nodemailer module are used
-    // Purpose: This is used to authenticate with the email service (Gmail in this case). It tells Nodemailer which email account to use for sending emails.
+    /* Purpose: This is used to authenticate with the email service (Gmail in this case). It tells Nodemailer which email account to use for sending emails. */
     // Usage: This should be set to the email address that you own and have access to, from which you will send emails.
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        // When using Gmail, it is highly recommended to use an App-Specific Password instead of your actual Gmail password. This enhances security and allows you to revoke access without changing your main Gmail password.
+        /* When using Gmail, it is highly recommended to use an App-Specific Password instead of your actual Gmail password. This enhances security and allows you to revoke access without changing your main Gmail password. */
         user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD,
       },
     });
 
     // Sender and receiver of email containing resetUrl
-    // This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <ecommerceclone@mail.com>. only shows "Ecommerce Clone"
+    /* This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <ecommerceclone@mail.com>. only shows "Ecommerce Clone" */
     const mailOptions = {
       from:  '"Ecommerce Clone" <ecommerceclone@mail.com>', 
       to: req.body.email, // Recipient's email address

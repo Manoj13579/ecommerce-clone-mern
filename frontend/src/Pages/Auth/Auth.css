@@ -121,3 +121,8 @@ a {
     overflow: hidden;
     opacity: 0.8;
 }
+
+.auth-form-upload-text {
+    color: rgb(112, 109, 109);
+    margin-bottom: 0rem;
+  }

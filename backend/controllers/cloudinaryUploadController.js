@@ -7,7 +7,7 @@ const uploadImageOnCloudinary = async (req, res) => {
       return res.status(400).json({ success: false, message: "No file uploaded" });
     }
     console.log('uploadImageOnCloudinary file path', req.file.path);
-    // req.file.path is a path(folder where multer saves file) with image name created by multer uploads\images\mage_1723020066290.webp
+    /* req.file.path is a path(folder where multer saves file) with image name created by multer uploads\images\mage_1723020066290.webp */
     const localFilePath = req.file.path;
     // inside this data we have url of file created by cloudinary
     const data = await uploadOnCloudinary(localFilePath);

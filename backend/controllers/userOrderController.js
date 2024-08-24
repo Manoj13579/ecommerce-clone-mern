@@ -80,7 +80,7 @@ const deleteUserOrder = async (req, res) => {
       return res.status(404).json({ message: 'CartOrder item not found' });
     }
 
-    // if found Remove the item from the array but just one even if two items with same id. findIndex returns index of first item that matches call back. here if id is equal then return first matched item's index
+    /* if found Remove the item from the array but just one even if two items with same id. findIndex returns index of first item that matches call back. here if id is equal then return first matched item's index */
     userOrder.cartOrder.splice(cartOrderIndex, 1);
 
     /* if the cartOrder array is now empty (meaning there are no items left in the order), the function deletes the entire userOrder from the database. cartOrder can have more than one product in single order or package if one product only deleted from a package containing two products then UserOrder is not deleted if only one product UserOrder is deleted. imp to do this coz there could be lots of UserOrder saved in database without  cartOrder.*/

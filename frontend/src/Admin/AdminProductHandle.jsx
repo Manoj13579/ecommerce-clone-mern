@@ -149,6 +149,7 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/addproduct`, {
         // Send data to the server in the request body which is typed in below field.
+        /* axios automatucally sends headers likeContent-Type: application/json in post request so no need to mention. same to multipart/form-data(formdata along with images or videos) or formdata or images. others like get won't need this. Accept: application/json means return in this format or json format is not handled by axios but all api send this automatically so no need to mention in. only in rare case in some dependencies if it explicitly mentions to include it strictly then only but it doesnot happen in most cases so don't include.  */
         title,
         description,
         category,

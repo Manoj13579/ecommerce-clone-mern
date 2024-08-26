@@ -56,10 +56,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// // Or, if your file is in a different location
-// app.get('/loaderio-54a9dd52b0f30e23652c545ffadbfaa2.txt', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'loaderio-54a9dd52b0f30e23652c545ffadbfaa2.txt'));
-// });
+// Or, if your file is in a different location
+app.get('/loaderio-54a9dd52b0f30e23652c545ffadbfaa2.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, 'loaderio-54a9dd52b0f30e23652c545ffadbfaa2.txt'));
+});
 
 /*sent coookie from frontend is parsed here first and used in jwt. session doesnot need this but jwt does so compulsory to use it. cookie attributes like cookie: {
   secure: process.env.NODE_ENV === 'production',  // Set to true in production with HTTPS

@@ -188,6 +188,7 @@ const userslogin = async (req, res) => {
 const refreshToken = async (req, res) => {
 
   // with credential from frontend sends this cookies which contains refresh and acessToken
+  /* if payload is same and same is secret key jwt always produces same token in cookies but because jwt inserts iat or time every time new token is generated it has different value. */
   const { refreshToken } = req.cookies;
   
 

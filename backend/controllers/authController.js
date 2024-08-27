@@ -42,7 +42,7 @@ const userssignup = async (req, res) => {
       { expiresIn: acessTokenExpiryDate }
     );
 
-   
+  //  send cookie with these characteristics
     res.cookie("accessToken", accessToken, {
      httpOnly: true,
     secure: process.env.NODE_ENV === 'production',  // Use secure cookies in production
@@ -138,9 +138,12 @@ const userslogin = async (req, res) => {
       { expiresIn: acessTokenExpiryDate }
     );
 
+    //  send cookie with these characteristics
+    // cookies has name eg accesstoken and token as value
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      // any site can acess n use it to login
       sameSite: "None",
     });
 
@@ -183,6 +186,8 @@ const userslogin = async (req, res) => {
 
 
 const refreshToken = async (req, res) => {
+
+  // with credential from frontend sends this cookies which contains refresh and acessToken
   const { refreshToken } = req.cookies;
   
 

@@ -11,7 +11,7 @@ const authenticateToken = (req, res, next) => {
     if (!accessToken) {
     return res.status(401).json({ success: false, message: "unauthorized" });
     }
-    /* If the token is valid, the decoded token payload is passed to the callback function along with process.env.ACCESS_TOKEN_SECRET n  user.*/
+    /* If the token is valid, the decoded token payload is passed to the callback function along with process.env.ACCESS_TOKEN_SECRET n  user.accesstoken is here until app refreshed so can be verified. jwt is stateless coz data or payload is saved in cokkies along with signature which verifies cookies.whereas sessin saves payload in server by which it verifies incoming cookies*/
     /* jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => { ... });
 jwt.verify() is used to verify the accessToken against process.env.ACCESS_TOKEN_SECRET, which should be the same secret used to sign the token during its creation.
 It asynchronously verifies the token's signature and decodes its payload.

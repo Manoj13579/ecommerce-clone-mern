@@ -103,7 +103,7 @@ const userinfo = JSON.parse(sessionStorage.getItem("userInfo"));
       } else if (aToken) {
         const intervalId = setInterval(() => {
           dispatch(getrefreshToken());
-        },  900000); // 900,000 ms = 15 minutes
+        },  10200000); // 10,200,000 ms = 2 hours 50 minutes
 // clean up function of useEffect
 /*When the interval is no longer needed (e.g., if the user logs out or the rToken changes), the cleanup function ensures that the interval is cleared. This prevents potential memory leaks and unnecessary calls to the getrefreshToken function, which could lead to unexpected behavior or performance issues. good to use cleanup in timeouts (like setInterval or setTimeout) */
         return () => {

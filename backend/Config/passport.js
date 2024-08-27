@@ -45,6 +45,7 @@ passport.use(
   )
 );
 // serialize gets data from passport . we are sending user to session in index.js
+// done: A callback function that Passport uses to continue the process.makes go to session
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });

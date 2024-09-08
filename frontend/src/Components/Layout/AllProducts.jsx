@@ -39,7 +39,7 @@ const AllProducts = () => {
   };
   return (
     <>
-    <h5>Just Added</h5>
+    <h5 style={{marginLeft: '1rem'}}>Just Added</h5>
     <section className="allproducts-card-organize">
       {/* sorting is applied to the complete products list before you limit the visible products.Make a shallow copy of the products array using .slice() coz .sort method overwrites original array */}
       {products?.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, visibleProducts).map((products) => (

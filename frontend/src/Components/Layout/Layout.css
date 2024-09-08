@@ -165,6 +165,8 @@
     }
     .inputsecondnavbar-wrapper {
       order: 1;
+      width: 50%;
+      margin-bottom: 1rem;
     }
   }
 
@@ -237,10 +239,14 @@
       margin-right: 6rem;
     } 
   }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 590px) {
     .carousel-control-next, .carousel-control-prev{
       display: none;
     } 
+    .carousel-item img {
+      height: 25vh; /* Reduce the height for smaller screens */
+      object-fit: contain; /* Ensure the image fits within the container */
+    }
   }
 
   /* imagecategory */

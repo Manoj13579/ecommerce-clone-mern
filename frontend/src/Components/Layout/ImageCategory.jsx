@@ -10,7 +10,7 @@ const ImageCategory = () => {
     
   return (
     <section >
-      <h5>Category</h5>
+      <h5 style={{marginLeft: '1rem'}}>Category</h5>
             <div className='image-category-container'>
               <div className='image-category-container-image'>
               <img src={`/women's-clothing.jpg`} onClick={() => {navigate(`categorypage/women's clothing`);

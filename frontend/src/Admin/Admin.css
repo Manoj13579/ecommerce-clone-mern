@@ -65,6 +65,9 @@
   }
   
   /* TotalProduct */
+.totalproduct-container {
+  width: 100%;
+}
   .totalproduct-container .header > h5 {
     color: #f85b4b;
     font-weight: bold;
@@ -78,7 +81,7 @@
   }
   .totalproduct-container .header button {
     height: 5vh;
-    width: 10%;
+    max-width: 10%;
     margin-left: 1rem;
     border: none;
     background-color: #e2cfc4;
@@ -104,6 +107,7 @@
   .totalproduct-container table tbody td {
     color: #f85b4b;
     border: 1px solid #dabeae;
+    padding: 1rem;
   }
   
   .totalproduct-price {
@@ -113,7 +117,7 @@
   
   .totalproduct-button-edit {
     height: 3.5vh;
-    width: 30%;
+    min-width: 30%;
     margin-left: 1rem;
     border: none;
     background-color: #f57224;
@@ -123,14 +127,14 @@
   .totalproduct-button-delete {
     font-size: 0.8rem;
     height: 3.5vh;
-    width: 30%;
+    min-width: 30%;
     margin-left: 1rem;
     border: none;
     background-color: rgb(223, 8, 8);
     color: #ddd4d4;
   }
   .totalproduct-img  > img {
-    width: 20%;
+    width: 80%;
     height: 8vh;
     object-fit: cover;
   }

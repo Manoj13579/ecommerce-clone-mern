@@ -90,6 +90,7 @@
     box-shadow: -1px 0 2px rgba(148, 141, 141, 0.5);
     height: 45vh;
     margin-top: 0.5rem;
+    padding: 1rem;
   }
   .proceed-button {
     border: none;

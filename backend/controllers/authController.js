@@ -316,9 +316,9 @@ const requestPasswordReset = async (req, res) => {
     });
 
     // Sender and receiver of email containing resetUrl
-    /*This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <ecommerceclone@mail.com>. only shows "Ecommerce Clone"*/
+    /*This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <eshop@mail.com>. only shows "E Shop"*/
     const mailOptions = {
-      from:  '"Ecommerce Clone" <ecommerceclone@mail.com>', 
+      from:  '"E Shop" <eshop@mail.com>', 
       to: user.email, // Recipient's email address
       subject: "Password Reset", // Email subject
       /* http://localhost:5173/reset-password is the URL that users will be directed when they click link inside their email. In deployment, need to change http://localhost:5173 */
@@ -401,9 +401,9 @@ const jwtEmailConfirmation = async (req, res) => {
     });
 
     // Sender and receiver of email containing resetUrl
-    /* This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <ecommerceclone@mail.com>. only shows "Ecommerce Clone" */
+    /* This email address will appear in the user's inbox. Does not need to be a real address; can have process.env.EMAIL or other that matches your app. but google policy will only show process.env.EMAIL even mentioned <eshop@mail.com>. only shows "E Shop" */
     const mailOptions = {
-      from:  '"Ecommerce Clone" <ecommerceclone@mail.com>', 
+      from:  '"E Shop" <eshop@mail.com>', 
       to: req.body.email, // Recipient's email address
       subject: "email registration confirmation", // Email subject
       /* http://localhost:5173/reset-password is the URL that users will be directed when they click link inside their email. In deployment, need to change http://localhost:5173 */

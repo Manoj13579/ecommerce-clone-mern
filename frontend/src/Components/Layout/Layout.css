@@ -1,6 +1,6 @@
 /* Layout */
 .top-navbar {
-    background-color: #f85606;
+    background-color: #370c7c;
     display: flex;
     width: auto;
     height: auto;
@@ -19,7 +19,7 @@
     font-size: 0.75rem;
   }
   .secondnavbar-container {
-    background-color: #f85606;
+    background-color: #370c7c;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -86,7 +86,7 @@
   
   
   .bi.bi-search {
-    color: #f85606;
+    color: #370c7c;
   }
   .right-items-navbar {
     display: flex;

@@ -26,6 +26,7 @@ const AdminProductHandle = () => {
   const [editId, setEditId] = useState("");
   const [showUpdate, setShowUpdate] = useState(false);
   const [uploadImage, setUploadImage] = useState();
+  const [publicId, setPublicId] = useState("");
   const [loading, setLoading] = useState(false);
   const inputRef = useRef();
 
@@ -34,6 +35,7 @@ const AdminProductHandle = () => {
   const query = useQuery();
 // 1 MB in bytes
 const MAX_FILE_SIZE = 1 * 1024 * 1024;
+
 
 
   useEffect(() => {
@@ -49,6 +51,7 @@ const MAX_FILE_SIZE = 1 * 1024 * 1024;
     const itemNew_Price = query.get("new_price");
     const itemOld_Price = query.get("old_price");
     const itemQuantity = query.get("quantity");
+    const itemPublicId = query.get("public_id");
     // Retrieves and sets edit item details if query parameters are present
     if (itemId) {
       setEditId(itemId);
@@ -59,6 +62,7 @@ const MAX_FILE_SIZE = 1 * 1024 * 1024;
       setNew_Price(itemNew_Price);
       setOld_Price(itemOld_Price);
       setQuantity(itemQuantity);
+      setPublicId(itemPublicId);
       setShowUpdate(true);
     }
   }, []);
@@ -103,8 +107,6 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
       </p>
     );
   }
-  const userInfo= JSON.parse(sessionStorage.getItem("userInfo"));
-  const token = userInfo.accessToken;
   const resetFields = () => {
     setTitle("");
     setDescription("");
@@ -140,8 +142,12 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
     const imageUploadResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/adminuploads`, formData, {
       withCredentials: true,
     });
+    console.log(imageUploadResponse.data);
+    
     // has two url use secure_url it is https another is http
     const imageUrl = imageUploadResponse.data.data.secure_url;
+    const public_id = imageUploadResponse.data.data.public_id;
+    console.log('add public_id', public_id);
     
 
     /*response data (response.data) is directly accessible after await axios.post(...), so you can use it immediately without chaining .then(response). This approach is part of the power of async/await syntax. if async not used .then(response) is used. */
@@ -149,7 +155,6 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/addproduct`, {
         // Send data to the server in the request body which is typed in below field.
-        /* axios automatucally sends headers likeContent-Type: application/json in post request so no need to mention. same to multipart/form-data(formdata along with images or videos) or formdata or images. others like get won't need this. Accept: application/json means return in this format or json format is not handled by axios but all api send this automatically so no need to mention in. only in rare case in some dependencies if it explicitly mentions to include it strictly then only but it doesnot happen in most cases so don't include.  */
         title,
         description,
         category,
@@ -157,7 +162,8 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
         new_price,
         old_price,
         quantity,
-        uploadImage
+        uploadImage,
+        public_id,
       },
         {
           withCredentials: true,
@@ -175,6 +181,7 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
           new_price,
           old_price,
           quantity,
+          public_id,
         })
       );
       resetFields();
@@ -191,6 +198,18 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
   }
   setLoading(false);
 };
+const deleteOldImage = async (publicId) => {
+  try {
+    await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/delete-old-image`, {
+      data: { publicId },
+      withCredentials: true,
+    });
+  } catch (error) {
+    toast.error("Failed to delete old image");
+    console.error(error);
+  }
+};
+
 
   const handleUpdate = async () => {
     if (
@@ -208,9 +227,12 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
 /* initializing imageUrl with the current image state, which is existing image URL if no new image is selected.
 It ensures that if no new image is selected (uploadImage is null or undefined), imageUrl retains the current value of image. This means if the user updates other fields but not the image, the existing image URL remains unchanged in the update request.*/
       let imageUrl = image;
+      let newPublicId = publicId; // Use the existing public ID for updates
 // Check if uploadImage state has a value (meaning a new image was selected)
     if (uploadImage) {
       setLoading(true);
+      // Delete the old image before uploading the new one
+    await deleteOldImage(publicId);
       // Upload the image and get the URL if a new image is selected
       /* uploadImage is the file object representing the image selected by the user.
 A FormData object is created and the image file is appended to it.
@@ -220,13 +242,12 @@ Once the image is uploaded, the server's response is expected to include the URL
 Multer processes multipart/form-data requests, which is the format used when uploading files through forms. It parses the incoming request and extracts the file data. so formData needed in uploading files*/
       const formData = new FormData();
       formData.append("image", uploadImage);
-      const imageUploadResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/uploads`, formData, {
+      const imageUploadResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/adminuploads`, formData, {
        withCredentials: true,
-       headers: {
-         Authorization: `Bearer ${token}`
-        },
       });
       imageUrl = imageUploadResponse.data.data.secure_url;
+      newPublicId = imageUploadResponse.data.data.public_id; // Get new public ID if a new image is uploaded
+      console.log('newPublicId', newPublicId);
     }
       const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/updateproducts`, {
         /*getProductsById is array so derived id like this.when id sent as request body
@@ -239,12 +260,10 @@ Multer processes multipart/form-data requests, which is the format used when upl
         new_price,
         old_price,
         quantity,
+        public_id: newPublicId,
       },
       {
         withCredentials: true,
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
       }
     );
       const id = response.data._id;
@@ -252,7 +271,7 @@ Multer processes multipart/form-data requests, which is the format used when upl
       dispatch(
         updateProduct({
           /*even we change _id to id or comment out all updateProduct here or in redux slice it still updates
-          coz we rernder component mount in useEffect or axios put so getProducts get updated. but always 
+          coz we rerender component mount in useEffect or axios put so getProducts get updated. but always 
           use redux dispatch with naming items similarly it is important even it works without it.*/
           _id: id,
           title,
@@ -262,6 +281,7 @@ Multer processes multipart/form-data requests, which is the format used when upl
           new_price,
           old_price,
           quantity,
+          public_id: newPublicId,
         }
        )
       );

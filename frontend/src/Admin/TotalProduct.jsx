@@ -16,6 +16,7 @@ const TotalProduct = () => {
   const [isOpen, setIsOpen] = useState(false);
   // Track which item to delete
   const [itemIdToDelete, setItemIdToDelete] = useState(null);
+  const [publicIdToDelete, setPublicIdToDelete] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // runs in component mount and gets product
@@ -36,8 +37,10 @@ const TotalProduct = () => {
     );
   }
 
-  const handleDelete = async (id) => {
+
+  const handleDelete = async (id, public_id) => {
     setItemIdToDelete(id); // Set the item ID to delete
+    setPublicIdToDelete(public_id); // Set the public ID to delete
     setIsOpen(true); // Open the confirmation modal
   };
   const handleConfirmDelete = async () => {
@@ -47,8 +50,8 @@ const TotalProduct = () => {
       considered secured since id is not visible in params as in another method. if using params to send data
        we need to change both in backend and front end. here we had to pass 
        await axios.delete(`http://localhost:4000/deleteproduct/${id}`);*/
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/deleteproduct/`, {
-        data: { itemIdToDelete },
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/deleteproduct`, {
+        data: { itemIdToDelete, publicIdToDelete },
         // no need to pass header coz using cookies.headers used to authenticate and send content type.withCredential works good for auth
         withCredentials: true,
       });
@@ -84,10 +87,11 @@ const TotalProduct = () => {
     productimage,
     productnewprice,
     productoldprice,
-    productquantity
+    productquantity,
+    public_id
   ) => {
     navigate(
-      `/adminproducthandle?id=${productid}&title=${producttitle}&description=${productdescription}&category=${productcategory}&image=${productimage}&new_price=${productnewprice}&old_price=${productoldprice}&quantity=${productquantity}`
+      `/adminproducthandle?id=${productid}&title=${producttitle}&description=${productdescription}&category=${productcategory}&image=${productimage}&new_price=${productnewprice}&old_price=${productoldprice}&quantity=${productquantity}&public_id=${public_id}`
     );
   };
 
@@ -137,7 +141,7 @@ const TotalProduct = () => {
                   <td>{item.quantity}</td>
                   <td>
                     <button
-                      onClick={() => handleDelete(item._id)}
+                      onClick={() => handleDelete(item._id, item.public_id,)}
                       className="totalproduct-button-delete"
                     >
                       Delete
@@ -152,7 +156,8 @@ const TotalProduct = () => {
                           item.image,
                           item.new_price,
                           item.old_price,
-                          item.quantity
+                          item.quantity,
+                          item.public_id
                         )
                       }
                       className="totalproduct-button-edit"

@@ -1,5 +1,5 @@
 import express from 'express';
-import { addproduct, deleteproduct, allproducts, updateproducts } from '../controllers/productController.js';
+import { addproduct, deleteproduct, allproducts, updateproducts, deleteOldImage } from '../controllers/productController.js';
 import { userssignup, userslogin, refreshToken, logout, requestPasswordReset, resetPassword, jwtEmailConfirmation, getAllUsers, adminProfileEdit, userProfileEdit } from '../controllers/authController.js';
 import { authenticateToken, authorizeAdmin } from '../middleware/authMiddleware.js';
 import upload from '../middleware/uploadMiddleware.js';
@@ -42,6 +42,7 @@ router.delete('/api/deleteproduct', authenticateToken, authorizeAdmin, deletepro
 // updating products
 // only by admin
 router.put("/api/updateproducts", authenticateToken, authorizeAdmin, updateproducts);
+router.delete('/api/delete-old-image', authenticateToken, authorizeAdmin, deleteOldImage);
 
 // Upload route
 // only by admin

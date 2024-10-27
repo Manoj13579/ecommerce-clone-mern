@@ -1,5 +1,6 @@
 // in import module in backend use  .js otherwise errror
 import Product from "../models/product.js";
+import cloudinary from 'cloudinary'; // Make sure to import Cloudinary
 
 
 // getting all products and sending to frontend
@@ -37,7 +38,14 @@ Use Case: This code is used when the request sent by the client is incorrect or 
 // if using params await Product.findOneAndDelete({ _id: req.params._id });
 const deleteproduct = async (req, res) => {
   const _id = req.body.itemIdToDelete;
+  const public_id = req.body.publicIdToDelete;
+  console.log('deleteproduct' ,public_id);
+  
   try{
+    // First, delete the image from Cloudinary
+    if (public_id) {
+      await cloudinary.v2.uploader.destroy(public_id);
+    }
     const data = await Product.findByIdAndDelete(_id);
     if (!data) {
       /*404 Not Found: Meaning: The server can not find the requested resource.
@@ -51,7 +59,19 @@ Use Case: This code is used when the requested resource could not be found on th
       return res.status(500).json({sucess: false, message: "Error deleting product", error: err })};
 };
 
-
+const deleteOldImage = async (req, res)=> {
+  const public_id = req.body.publicId;
+  console.log('deleteOldImage hit', public_id);
+  
+  try{
+    if (public_id) {
+      await cloudinary.v2.uploader.destroy(public_id);
+    }
+    res.status(200).json({success: true });
+  }
+    catch (err) {
+      return res.status(500).json({sucess: false, message: "Error deleting product", error: err })};
+}
 
 // updating products
 const updateproducts = async (req, res) => {
@@ -71,6 +91,7 @@ const updateproducts = async (req, res) => {
              old_price: req.body.old_price,
              quantity: req.body.quantity,
              description: req.body.description,
+             public_id: req.body.public_id,
            },
            { new: true } // This option returns the updated document
          )
@@ -90,4 +111,4 @@ const updateproducts = async (req, res) => {
   
 };
 
-export { addproduct, deleteproduct, allproducts, updateproducts };
+export { addproduct, deleteproduct, allproducts, updateproducts, deleteOldImage };

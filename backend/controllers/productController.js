@@ -39,7 +39,7 @@ Use Case: This code is used when the request sent by the client is incorrect or 
 const deleteproduct = async (req, res) => {
   const _id = req.body.itemIdToDelete;
   const public_id = req.body.publicIdToDelete;
-  console.log('deleteproduct' ,public_id);
+  
   
   try{
     // First, delete the image from Cloudinary

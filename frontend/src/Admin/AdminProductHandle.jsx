@@ -142,12 +142,11 @@ jpeg: Specifies the format of the image, which in this case is JPEG (Joint Photo
     const imageUploadResponse = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/adminuploads`, formData, {
       withCredentials: true,
     });
-    console.log(imageUploadResponse.data);
     
     // has two url use secure_url it is https another is http
     const imageUrl = imageUploadResponse.data.data.secure_url;
     const public_id = imageUploadResponse.data.data.public_id;
-    console.log('add public_id', public_id);
+    
     
 
     /*response data (response.data) is directly accessible after await axios.post(...), so you can use it immediately without chaining .then(response). This approach is part of the power of async/await syntax. if async not used .then(response) is used. */
@@ -247,7 +246,6 @@ Multer processes multipart/form-data requests, which is the format used when upl
       });
       imageUrl = imageUploadResponse.data.data.secure_url;
       newPublicId = imageUploadResponse.data.data.public_id; // Get new public ID if a new image is uploaded
-      console.log('newPublicId', newPublicId);
     }
       const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/updateproducts`, {
         /*getProductsById is array so derived id like this.when id sent as request body

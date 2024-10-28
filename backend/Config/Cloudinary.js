@@ -17,6 +17,8 @@ const uploadOnCloudinary = async (localFilePath) => {
   try {
     const data = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
+      // save in this folder in cloudinary
+      folder: "ecommerce-clone",
     });
     console.log("File uploaded on Cloudinary successfully", data.url);
     return data;

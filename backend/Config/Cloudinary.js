@@ -4,7 +4,7 @@ import { v2 as cloudinary} from "cloudinary";
 import fs from "fs";
 
 
-// / this config bcoz of secret key and other two authorizes to save file in particular user account in cloudinary
+//this config bcoz of secret key and other two authorizes to save file in particular user account in cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -17,7 +17,7 @@ const uploadOnCloudinary = async (localFilePath) => {
   try {
     const data = await cloudinary.uploader.upload(localFilePath, {
       resource_type: "auto",
-      // save in this folder in cloudinary
+// save in this folder in cloudinary. although also saved in Assets in cloudinary but uses only one space per image.
       folder: "ecommerce-clone",
     });
     console.log("File uploaded on Cloudinary successfully", data.url);
